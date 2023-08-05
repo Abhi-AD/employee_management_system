@@ -1,0 +1,14 @@
+{% extends "emp/emp_base.html" %}
+{% block main %}
+<h4 class="text-success p-2" style="border-bottom: 2px solid red;">Employee dashboard</h4>
+<div class="row text-center">
+     <div class="col-sm-12 p-2">
+          <div class="card shadow">
+               <div class="card-body">
+                    <h4 class="text-secondary">Welcome Back To EMS</h4>
+                    <h5 class="text-capitalize">{{request.user.first_name}} {{request.user.last_name}}</h5>
+               </div>
+          </div>
+     </div>
+</div>
+{% endblock main %}

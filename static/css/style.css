@@ -2,3 +2,6 @@
      color: black !important;
      background-color: green;
 }
+.list-group-item{
+     padding: 8px !important;
+}

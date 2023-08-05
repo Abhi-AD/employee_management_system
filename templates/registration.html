@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+{% include 'header.html' %}
 <script>
      function checkpassword() {
           if (document.signup.password.value != document.signup.conformpassword.value) {
