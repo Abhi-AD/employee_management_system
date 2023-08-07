@@ -1,0 +1,56 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <title>Management system in Admin plane</title>
+     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+     <link rel="stylesheet" href="{% static 'css/admin_login_style.css' %}">
+
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+     <!-- <img src="{% static 'img/1.png' %}" alt=""> -->
+</head>
+
+<body style="background-image: url(/static/img/admin_bg.avif);">
+     <div class="row">
+          <div class="col-lg-5 m-auto">
+               <div class="card mt-5 bg-secondary ">
+                    <div class="card-title text-center mt-3">
+                         <img src="{% static 'img/admin_login.png' %}" alt="" width="150" height="150">
+                    </div>
+                    <div class="card-body">
+                         <form action="" method="post">
+                              {% csrf_token %}
+                              <div class="input-group mb-3">
+                                   <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                             <i class="fa fa-user fa-3x"></i>
+                                        </span>
+                                   </div>
+                                   <input type="text" name="username" class="form-control py-3"
+                                        placeholder="Enter a username">
+                              </div>
+                              <div class="input-group mb-3">
+                                   <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                             <i class="fa fa-lock fa-3x"></i>
+                                        </span>
+                                   </div>
+                                   <input type="password" name="password" class="form-control py-3"
+                                        placeholder="Enter a password">
+                              </div>
+                              <input type="submit" name="Login" class="btn btn-success px-5">
+                              <a href="{% url 'index' %}" class="text-white mb-2">Go to home</a>
+                         </form>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <script src="{% static 'js/bootstrap.bundle.min.js ' %}"></script>
+</body>
+
+</html>

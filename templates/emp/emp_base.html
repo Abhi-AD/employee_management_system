@@ -9,19 +9,23 @@
           <div class="list-group">
                <a href="{% url 'emp_home' %}"
                     class="list-group-item list-group-item-warning list-group-item-action {% if request.path == '/emp_home/' %} active {% endif %}">Dasboard</a>
-               <a href="{% url 'emp_profile' %}" class="list-group-item list-group-item-warning list-group-item-action"><i
+               <a href="{% url 'emp_profile' %}"
+                    class="list-group-item list-group-item-warning list-group-item-action"><i
                          class="fa-solid fa-user"></i> Profile</a>
-               <a href="" class="list-group-item list-group-item-warning list-group-item-action"><i
+               <a href="#"
+                    class="list-group-item list-group-item-warning list-group-item-action"><i
                          class="fa-solid fa-file"></i> Experiences</a>
                <a href="" class="list-group-item list-group-item-warning list-group-item-action"><i
                          class="fa-solid fa-file-import"></i> Edit experiences</a>
-               <a href="" class="list-group-item list-group-item-warning list-group-item-action"><i
-                         class="fas fa-book"></i> Education</a>
+               <a href="#"
+                    class="list-group-item list-group-item-warning list-group-item-action"><i class="fas fa-book"></i>
+                    Education</a>
                <a href="" class="list-group-item list-group-item-warning list-group-item-action"><i
                          class="fas fa-graduation-cap"></i> Edit education</a>
                <a href="" class="list-group-item list-group-item-warning list-group-item-action"> <i
                          class="fas fa-lock"></i> Change password</a>
-               <a href="{% url 'emp_logout' %}" class="list-group-item list-group-item-warning list-group-item-action"><i
+               <a href="{% url 'emp_logout' %}"
+                    class="list-group-item list-group-item-warning list-group-item-action"><i
                          class="fas fa-sign-out-alt"></i> Logout</a>
 
 
