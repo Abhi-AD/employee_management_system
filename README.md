@@ -33,7 +33,7 @@
   4. Clone the project
 
 ```bash
-  git clone https://github.com/Abhi-AD/Blog_APP
+  git clone https://github.com/Abhi-AD/employee_management_system
 ```
   5. Createsuperuser
 
