@@ -26,6 +26,11 @@ urlpatterns = [
     path("emp_home/", emp_home, name="emp_home"),
     path("emp_profile/", emp_profile, name="emp_profile"),
     path("emp_logout/", emp_logout, name="emp_logout"),
+    path("admin_login/",admin_login, name="admin_login"),
+    path("emp_experiences/",emp_experiences, name="emp_experiences"),
+    path("emp_edit_experiences/",emp_edit_experiences, name="emp_edit_experiences"),
+    
+    
     
     
     

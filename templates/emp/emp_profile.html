@@ -60,9 +60,9 @@
                          </div>
                          <div class="col-sm-6">
                               <div class="form-group">
-                                   <label for="">Gender[{{employee.gender}}]</label>
+                                   <label for="">Gender</label>
                                    <select name="gender" class="form-control">
-                                        <option value="none">Select Gender</option>
+                                        <option value="none">Select Gender[{{employee.gender}}]</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                    </select>
@@ -78,8 +78,8 @@
 
 {% if error == "no" %}
 <script>
-     alert("Data Inserted Successfully");
-     window.location = "{% url 'emp_login'%}";  // Redirecting to other page (add)
+     alert("Profile update Successfully");
+     window.location = "{% url 'emp_profile'%}";  // Redirecting to other page (add)
 </script>
 {% endif %}
 
