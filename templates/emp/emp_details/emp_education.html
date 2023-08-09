@@ -1,0 +1,57 @@
+{% extends "emp/emp_base.html" %}
+{% block main %}
+<div class="card shadow m-2">
+     <div class="card-body">
+          <a href="{%url 'emp_edit_education'%}" class="btn btn-primary position-absolute top-5 end-0">Edit Education Details</a>
+
+          <h2 class="p-2 text-secondary">Education Details</h2>
+
+          <div class="container-fluid">
+               <table class="table table-bordered">
+                    <thead>
+                         <tr>
+                              <th scope="col">Course Name</th>
+                              <th scope="col">School Name</th>
+                              <th scope="col">Pass out Years</th>
+                              <th scope="col">Percentage</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                         <tr>
+                              <th scope="row">{{education.coursepg}}</th>
+                              <th scope="row">{{education.schoolpg}}</th>
+                              <th scope="row">{{education.yearofpassingpg}}</th>
+                              <th scope="row">{{education.percentagepg}}</th>
+                         </tr>
+                         <tr>
+                              <th scope="row">{{education.coursegra}}</th>
+                              <th scope="row">{{education.schoolgra}}</th>
+                              <th scope="row">{{education.yearofpassinggra}}</th>
+                              <th scope="row">{{education.percentagegra}}</th>
+                         </tr>
+                         <tr>
+                              <th scope="row">{{education.coursessc}}</th>
+                              <th scope="row">{{education.schoolssc}}</th>
+                              <th scope="row">{{education.yearofpassingssc}}</th>
+                              <th scope="row">{{education.percentagessc}}</th>
+                         </tr>
+                         <tr>
+                              <th scope="row">{{education.coursehsc}}</th>
+                              <th scope="row">{{education.schoolhsc}}</th>
+                              <th scope="row">{{education.yearofpassinghsc}}</th>
+                              <th scope="row">{{education.percentagehsc}}</th>
+                         </tr>
+                    </tbody>
+               </table>
+               
+          </div>
+     </div>
+</div>
+
+
+
+
+
+
+
+{% endblock main %}

@@ -29,6 +29,8 @@ urlpatterns = [
     path("admin_login/",admin_login, name="admin_login"),
     path("emp_experiences/",emp_experiences, name="emp_experiences"),
     path("emp_edit_experiences/",emp_edit_experiences, name="emp_edit_experiences"),
+    path("emp_education/",emp_education, name="emp_education"),
+    path("emp_edit_education/",emp_edit_education, name="emp_edit_education"),
     
     
     

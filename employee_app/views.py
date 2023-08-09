@@ -122,33 +122,33 @@ def emp_edit_experiences(request):
         first_comany_name = request.POST["first_comany_name"]
         first_comany_designation = request.POST["first_comany_designation"]
         first_comany_duration = request.POST["first_comany_duration"]
-        first_comany_salary = request.POST["first_comany_salary"]
+        first_comany_years = request.POST["first_comany_years"]
 
         second_comany_name = request.POST["second_comany_name"]
         second_comany_designation = request.POST["second_comany_designation"]
         second_comany_duration = request.POST["second_comany_duration"]
-        second_comany_salary = request.POST["second_comany_salary"]
+        second_comany_years = request.POST["second_comany_years"]
 
         third_comany_name = request.POST["third_comany_name"]
         third_comany_designation = request.POST["third_comany_designation"]
         third_comany_duration = request.POST["third_comany_duration"]
-        third_comany_salary = request.POST["third_comany_salary"]
+        third_comany_years = request.POST["third_comany_years"]
 
 
         experience.first_comany_name = first_comany_name
         experience.first_comany_designation = first_comany_designation
         experience.first_comany_duration = first_comany_duration
-        experience.first_comany_salary = first_comany_salary   
+        experience.first_comany_years = first_comany_years   
              
         experience.second_comany_name = second_comany_name
         experience.second_comany_designation = second_comany_designation
         experience.second_comany_duration = second_comany_duration
-        experience.second_comany_salary = second_comany_salary   
+        experience.second_comany_years = second_comany_years   
              
         experience.third_comany_name =third_comany_name
         experience.third_comany_designation = third_comany_designation
         experience.third_comany_duration = third_comany_duration
-        experience.third_comany_salary = third_comany_salary
+        experience.third_comany_years = third_comany_years
 
 
         try:
@@ -157,3 +157,73 @@ def emp_edit_experiences(request):
         except:
             error = "yes"
     return render(request, "emp/emp_details/emp_experience_update.html", locals())
+
+
+def emp_education(request):
+    if not request.user.is_authenticated:
+        return redirect("emp_login")
+    user = request.user
+    education = EmployeeEducation.objects.get(user=user)
+    return render(request, "emp/emp_details/emp_education.html", locals())
+
+
+from django.core.exceptions import ObjectDoesNotExist
+def emp_edit_education(request):
+    if not request.user.is_authenticated:
+        return redirect("emp_login")
+    error = ""
+    user = request.user
+    try:
+        education = EmployeeEducation.objects.get(user=user)
+    except ObjectDoesNotExist:
+        education = EmployeeEducation(user=user)
+
+    if request.method == "POST":
+        coursepg = request.POST["coursepg"]
+        schoolpg = request.POST["schoolpg"]
+        yearofpassingpg = request.POST["yearofpassingpg"]
+        percentagepg = request.POST["percentagepg"]
+
+        coursegra = request.POST["coursegra"]
+        schoolgra = request.POST["schoolgra"]
+        yearofpassinggra = request.POST["yearofpassinggra"]
+        percentagegra = request.POST["percentagegra"]
+
+        coursessc = request.POST["coursessc"]
+        schoolssc = request.POST["schoolssc"]
+        yearofpassingssc = request.POST["yearofpassingssc"]
+        percentagessc = request.POST["percentagessc"]
+        
+        coursehsc = request.POST["coursehsc"]
+        schoolhsc = request.POST["schoolhsc"]
+        yearofpassinghsc = request.POST["yearofpassinghsc"]
+        percentagehsc = request.POST["percentagehsc"]
+
+
+        education.coursepg = coursepg
+        education.schoolpg = schoolpg
+        education.yearofpassingpg = yearofpassingpg
+        education.percentagepg = percentagepg   
+             
+        education.coursegra = coursegra
+        education.schoolgra = schoolgra
+        education.yearofpassinggra = yearofpassinggra
+        education.percentagegra = percentagegra
+             
+        education.coursessc = coursessc
+        education.schoolssc = schoolssc
+        education.yearofpassingssc = yearofpassingssc
+        education.percentagessc = percentagessc
+        
+        education.coursehsc = coursehsc
+        education.schoolhsc = schoolhsc
+        education.yearofpassinghsc = yearofpassinghsc
+        education.percentagehsc = percentagehsc
+
+
+        try:
+            education.save()
+            error = "no"
+        except:
+            error = "yes"
+    return render(request, "emp/emp_details/emp_education_update.html", locals())

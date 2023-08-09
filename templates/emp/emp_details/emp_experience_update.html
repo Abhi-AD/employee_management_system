@@ -11,69 +11,50 @@
                <form action="" method="post">
                     {% csrf_token%}
 
-
                     <table class="table table-bordered">
-                         <tr>
-                              <th>First Company Name</th>
-                              <td><input type="text" name="first_comany_name" value="{{experience.first_comany_name}}"
-                                        class="form-control"></th>
-                         </tr>
-                         <tr>
-                              <th>First Company Designation</th>
-                              <td><input type="text" name="first_comany_designation"
-                                        value="{{experience.first_comany_designation}}" class="form-control"></th>
-                         </tr>
-                         <tr>
-                              <th>First Company Duration</th>
-                              <td><input type="text" name="first_comany_duration"
-                                        value="{{experience.first_comany_duration}}" class="form-control"></th>
-                         </tr>
-                         <tr>
-                              <th>First Company Salary</th>
-                              <td><input type="text" name="first_comany_salary"
-                                        value="{{experience.first_comany_salary}}" class="form-control"></th>
-                         </tr>
-                         <tr>
-                              <th>Second Company Name</th>
-                              <td><input type="text" name="second_comany_name" value="{{experience.second_comany_name}}"
-                                        class="form-control"></th>
-                         </tr>
-                         <tr>
-                              <th>Second Company Designation</th>
-                              <td><input type="text" name="second_comany_designation"
-                                        value="{{experience.second_comany_designation}}" class="form-control"></th>
-                         </tr>
-                         <tr>
-                              <th>Second Company Duration</th>
-                              <td><input type="text" name="second_comany_duration"
-                                        value="{{experience.second_comany_duration}}" class="form-control"></th>
-                         </tr>
-                         <tr>
-                              <th>Second Company Salary</th>
-                              <td><input type="text" name="second_comany_salary"
-                                        value="{{experience.second_comany_salary}}" class="form-control"></th>
-                         </tr>
-                         <tr>
-                              <th>Third Company Name</th>
-                              <td><input type="text" name="third_comany_name" value="{{experience.third_comany_name}}"
-                                        class="form-control"></th>
-                         </tr>
-                         <tr>
-                              <th>Third Company Designation</th>
-                              <td><input type="text" name="third_comany_designation"
-                                        value="{{experience.third_comany_designation}}" class="form-control"></th>
-                         </tr>
-                         <tr>
-                              <th>Third Company Duration</th>
-                              <td><input type="text" name="third_comany_duration"
-                                        value="{{experience.third_comany_duration}}" class="form-control"></th>
-                         </tr>
-                         <tr>
-                              <th>Third Company Salary</th>
-                              <td><input type="text" name="third_comany_salary"
-                                        value="{{experience.third_comany_salary}}" class="form-control"></th>
-                         </tr>
+                         <thead>
+                              <tr>
+                                   <th scope="col">Company Name</th>
+                                   <th scope="col">Designation</th>
+                                   <th scope="col">Duration</th>
+                                   <th scope="col">Years</th>
+                              </tr>
+                         </thead>
+                         <tbody>
+                              <tr>
+                                   <th scope="row"><input type="text" name="first_comany_name"
+                                             value="{{experience.first_comany_name}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="first_comany_designation"
+                                             value="{{experience.first_comany_designation}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="first_comany_duration"
+                                             value="{{experience.first_comany_duration}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="first_comany_years"
+                                             value="{{experience.first_comany_years}}" class="form-control" </th>
+                              </tr>
+                              <tr>
+                                   <th scope="row"><input type="text" name="second_comany_name"
+                                             value="{{experience.second_comany_name}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="second_comany_designation"
+                                             value="{{experience.second_comany_designation}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="second_comany_duration"
+                                             value="{{experience.second_comany_duration}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="second_comany_years"
+                                             value="{{experience.second_comany_years}}" class="form-control"></th>
+                              <tr>
+                                   <th scope="row"><input type="text" name="third_comany_name"
+                                             value="{{experience.third_comany_name}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="third_comany_designation"
+                                             value="{{experience.third_comany_designation}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="third_comany_duration"
+                                             value="{{experience.third_comany_duration}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="third_comany_years"
+                                             value="{{experience.third_comany_years}}" class="form-control"></th>
+                              </tr>
+                         </tbody>
                     </table>
+
+
+
                     <input type="submit" name="Update" class="btn btn-success position-absolute bottom-0 end-0 px-5">
                </form>
 
@@ -85,7 +66,7 @@
 {% if error == "no" %}
 <script>
      alert("Experience update Successfully");
-     window.location = "{% url 'emp_profile'%}";  // Redirecting to other page (add)
+     window.location = "{% url 'emp_edit_experiences'%}";  // Redirecting to other page (add)
 </script>
 {% endif %}
 

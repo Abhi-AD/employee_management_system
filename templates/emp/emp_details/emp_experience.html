@@ -2,62 +2,43 @@
 {% block main %}
 <div class="card shadow m-2">
      <div class="card-body">
-          <a href="{%url 'emp_edit_experiences'%}" class="btn btn-primary position-absolute top-5 end-0">Edit Experiences</a>
+          <a href="{%url 'emp_edit_experiences'%}" class="btn btn-primary position-absolute top-5 end-0">Edit
+               Experiences</a>
 
           <h2 class="p-2 text-secondary">Woking Experiences</h2>
 
           <div class="container-fluid">
                <table class="table table-bordered">
-                    <tr>
-                         <th>First Company Name</th>
-                         <td>{{experience.first_comany_name}}</th>
-                    </tr>
-                    <tr>
-                         <th>First Company Designation</th>
-                         <td>{{experience.first_comany_designation}}</th>
-                    </tr>
-                    <tr>
-                         <th>First Company Duration</th>
-                         <td>{{experience.first_comany_duration}}</th>
-                    </tr>
-                    <tr>
-                         <th>First Company Salary</th>
-                         <td>{{experience.first_comany_salary}}</th>
-                    </tr>
-                    <tr>
-                         <th>Second Company Name</th>
-                         <td>{{experience.second_comany_name}}</th>
-                    </tr>
-                    <tr>
-                         <th>Second Company Designation</th>
-                         <td>{{experience.second_comany_designation}}</th>
-                    </tr>
-                    <tr>
-                         <th>Second Company Duration</th>
-                         <td>{{experience.second_comany_duration}}</th>
-                    </tr>
-                    <tr>
-                         <th>Second Company Salary</th>
-                         <td>{{experience.second_comany_salary}}</th>
-                    </tr>
-                    <tr>
-                         <th>Third Company Name</th>
-                         <td>{{experience.third_comany_name}}</th>
-                    </tr>
-                    <tr>
-                         <th>Third Company Designation</th>
-                         <td>{{experience.third_comany_designation}}</th>
-                    </tr>
-                    <tr>
-                         <th>Third Company Duration</th>
-                         <td>{{experience.third_comany_duration}}</th>
-                    </tr>
-                    <tr>
-                         <th>Third Company Salary</th>
-                         <td>{{experience.third_comany_salary}}</th>
-                    </tr>
+                    <thead>
+                         <tr>
+                              <th scope="col">Company Name</th>
+                              <th scope="col">Designation</th>
+                              <th scope="col">Duration</th>
+                              <th scope="col">Years</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                         <tr>
+                              <th scope="row">{{experience.first_comany_name}}</th>
+                              <th scope="row">{{experience.first_comany_designation}}</th>
+                              <th scope="row">{{experience.first_comany_duration}}</th>
+                              <th scope="row">{{experience.first_comany_years}}</th>
+                         </tr>
+                         <tr>
+                              <th scope="row">{{experience.second_comany_name}}</th>
+                              <th scope="row">{{experience.second_comany_designation}}</th>
+                              <th scope="row">{{experience.second_comany_duration}}</th>
+                              <th scope="row">{{experience.second_comany_years}}</th>
+                         </tr>
+                         <tr>
+                              <th scope="row">{{experience.third_comany_name}}</th>
+                              <th scope="row">{{experience.third_comany_designation}}</th>
+                              <th scope="row">{{experience.third_comany_duration}}</th>
+                              <th scope="row">{{experience.third_comany_years}}</th>
+                         </tr>
+                    </tbody>
                </table>
-               
+
           </div>
      </div>
 </div>

@@ -1,0 +1,93 @@
+{% extends "emp/emp_base.html" %}
+{% block main %}
+<div class="card shadow m-2">
+     <div class="card-body">
+          <a href="{% url 'emp_education' %}" class="btn btn-primary position-absolute top-5 end-0">View Employee
+               Education</a>
+
+          <h2 class="p-2 text-secondary">Update Education</h2>
+
+          <div class="container-fluid">
+               <form action="" method="post">
+                    {% csrf_token%}
+
+
+                    <table class="table table-bordered">
+                         <thead>
+                              <tr>
+                                   <th scope="col">Course Name</th>
+                                   <th scope="col">School Name</th>
+                                   <th scope="col">Pass out Years</th>
+                                   <th scope="col">Percentage</th>
+                              </tr>
+                         </thead>
+                         <tbody>
+                              <tr>
+                                   <th scope="row"><input type="text" name="coursepg"
+                                             value="{{education.coursepg}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="schoolpg"
+                                             value="{{education.schoolpg}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="yearofpassingpg"
+                                             value="{{education.yearofpassingpg}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="percentagepg"
+                                             value="{{education.percentagepg}}" class="form-control"></th>
+                              </tr>
+                              <tr>
+                                   <th scope="row"><input type="text" name="coursegra"
+                                             value="{{education.coursegra}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="schoolgra"
+                                             value="{{education.schoolgra}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="yearofpassinggra"
+                                             value="{{education.yearofpassinggra}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="percentagegra"
+                                             value="{{education.percentagegra}}" class="form-control"></th>
+                              </tr>
+                              <tr>
+                                   <th scope="row"><input type="text" name="coursessc"
+                                             value="{{education.coursessc}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="schoolssc"
+                                             value="{{education.schoolssc}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="yearofpassingssc"
+                                             value="{{education.yearofpassingssc}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="percentagessc"
+                                             value="{{education.percentagessc}}" class="form-control"></th>
+                              </tr>
+                              <tr>
+                                   <th scope="row"><input type="text" name="coursehsc"
+                                             value="{{education.coursehsc}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="schoolhsc"
+                                             value="{{education.schoolhsc}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="yearofpassinghsc"
+                                             value="{{education.yearofpassinghsc}}" class="form-control"></th>
+                                   <th scope="row"><input type="text" name="percentagehsc"
+                                             value="{{education.percentagehsc}}" class="form-control"></th>
+                              </tr>
+                         </tbody>
+                    </table>
+                    <input type="submit" name="Update" class="btn btn-success position-absolute bottom-0 end-0 px-5">
+               </form>
+
+          </div>
+     </div>
+</div>
+
+
+{% if error == "no" %}
+<script>
+     alert("Education update Successfully");
+     window.location = "{% url 'emp_edit_education'%}";  // Redirecting to other page (add)
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+     alert('Please Enter Details');
+</script>
+
+{% endif %}
+
+
+
+
+
+{% endblock main %}
