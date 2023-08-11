@@ -43,7 +43,8 @@
                                         placeholder="Enter a password">
                               </div>
                               <input type="submit" name="Login" class="btn btn-success px-5">
-                              <a href="{% url 'index' %}" class=" btn btn-primary  mb-2 position-absolute top-5 end-0">Go to home</a>
+                              <a href="{% url 'index' %}"
+                                   class=" btn btn-primary  mb-2 position-absolute top-5 end-0">Go to home</a>
                          </form>
                     </div>
                </div>
@@ -51,6 +52,21 @@
      </div>
 
      <script src="{% static 'js/bootstrap.bundle.min.js ' %}"></script>
+
+
+     {% if error == "no" %}
+     <script>
+          window.location = "{% url 'admin_home' %}";
+     </script>
+     {% endif %}
+
+     {% if error == "yes" %}
+     <script>
+          alert('Invalid Credentials');
+     </script>
+
+     {% endif %}
+
 </body>
 
 </html>

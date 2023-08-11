@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="row">
+     <div class="col-sm-2 p-0">
+          <img src="{% static 'img/admin_login.png' %}" alt="Images" height="100" width="100"
+               class="img-thumbnail rounded-circle my-5 d-flex">
+
+          <div class="list-group">
+               <a href="{% url 'admin_home' %}"
+                    class="list-group-item list-group-item-warning list-group-item-action {% if request.path == '/admin_home/' %} active {% endif %}">Dasboard</a>
+               <a href="{% url 'all_employee' %}"
+                    class="list-group-item list-group-item-warning list-group-item-action {% if request.path == '/all_employee/' %} active {% endif %}"><i
+                         class="fa-solid fa-user"></i> All Employee</a>
+               <a href="{% url 'admin_change_password' %}"
+                    class="list-group-item list-group-item-warning list-group-item-action {% if request.path == '/admin_change_password/' %} active {% endif %}">
+                    <i class="fas fa-lock"></i> Change password</a>
+               <a href="{% url 'emp_logout' %}"
+                    class="list-group-item list-group-item-warning list-group-item-action"><i
+                         class="fas fa-sign-out-alt"></i> Logout</a>
+
+
+          </div>
+     </div>
+
+
+     <div class="col-sm-10 p-0">
+          <div class="container-fluid p-2">
+               <h5 class="text-center p-3 font-weigth-bold"
+                    style="border-bottom: 3px solid rgb(61, 10, 132);border-top: 3px solid rgb(61, 10, 132);">Employee
+                    Record </h5>
+          </div>
+
+          <div class="card shadow" style="min-height: 85vh;">
+               <div class="card-body">
+                    {% block main %}
+                    {% endblock main %}
+
+               </div>
+
+          </div>
+     </div>
+</div>
+
+
+
+{% endblock content %}
