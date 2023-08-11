@@ -31,6 +31,7 @@ urlpatterns = [
     path("emp_edit_experiences/",emp_edit_experiences, name="emp_edit_experiences"),
     path("emp_education/",emp_education, name="emp_education"),
     path("emp_edit_education/",emp_edit_education, name="emp_edit_education"),
+    path("change_password/",change_password, name="change_password"),
     
     
     

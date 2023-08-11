@@ -10,20 +10,24 @@
                <a href="{% url 'emp_home' %}"
                     class="list-group-item list-group-item-warning list-group-item-action {% if request.path == '/emp_home/' %} active {% endif %}">Dasboard</a>
                <a href="{% url 'emp_profile' %}"
-                    class="list-group-item list-group-item-warning list-group-item-action"><i
+                    class="list-group-item list-group-item-warning list-group-item-action {% if request.path == '/emp_profile/' %} active {% endif %}"><i
                          class="fa-solid fa-user"></i> Profile</a>
                <a href="{% url 'emp_experiences' %}"
-                    class="list-group-item list-group-item-warning list-group-item-action"><i
+                    class="list-group-item list-group-item-warning list-group-item-action {% if request.path == '/emp_experiences/' %} active {% endif %}"><i
                          class="fa-solid fa-file"></i> Experiences</a>
-               <a href="{%url 'emp_edit_experiences'%}" class="list-group-item list-group-item-warning list-group-item-action"><i
+               <a href="{%url 'emp_edit_experiences'%}"
+                    class="list-group-item list-group-item-warning list-group-item-action {% if request.path == '/emp_edit_experiences/' %} active {% endif %}"><i
                          class="fa-solid fa-file-import"></i> Edit experiences</a>
                <a href="{% url 'emp_education' %}"
-                    class="list-group-item list-group-item-warning list-group-item-action"><i class="fas fa-book"></i>
+                    class="list-group-item list-group-item-warning list-group-item-action {% if request.path == '/emp_education/' %} active {% endif %}"><i
+                         class="fas fa-book"></i>
                     Education</a>
-               <a href="{%url 'emp_edit_education'%}" class="list-group-item list-group-item-warning list-group-item-action"><i
+               <a href="{%url 'emp_edit_education'%}"
+                    class="list-group-item list-group-item-warning list-group-item-action {% if request.path == '/emp_edit_education/' %} active {% endif %}"><i
                          class="fas fa-graduation-cap"></i> Edit education</a>
-               <a href="" class="list-group-item list-group-item-warning list-group-item-action"> <i
-                         class="fas fa-lock"></i> Change password</a>
+               <a href="{% url 'change_password' %}"
+                    class="list-group-item list-group-item-warning list-group-item-action {% if request.path == '/change_password/' %} active {% endif %}">
+                    <i class="fas fa-lock"></i> Change password</a>
                <a href="{% url 'emp_logout' %}"
                     class="list-group-item list-group-item-warning list-group-item-action"><i
                          class="fas fa-sign-out-alt"></i> Logout</a>
