@@ -29,8 +29,8 @@
                               <td>{{i.user.username}}</td>
                               <td>{{i.contact}}</td>
                               <td>{{i.join_date}}</td>
-                              <td><a href="" class="btn btn-primary">Edit profile </a>
-                                   <a href="" class="btn btn-danger"
+                              <td><a href="/admin_emp_view_detail/{{i.pk}}/" class="btn btn-primary">Edit profile </a>
+                                   <a href="/emp_delete/{{i.pk}}/" class="btn btn-danger"
                                         onclick="return confirm('Are you sure?')">Delete</a>
                               </td>
 

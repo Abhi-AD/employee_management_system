@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from .models import *
+from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 
 
@@ -360,3 +361,17 @@ def edit_admin_education(request):
             error = "yes"
     return render(request, "admin/admin_education_update.html", locals())
 
+def emp_delete(request, pk):
+    if not request.user.is_authenticated:
+        return redirect("admin_login")
+    emp = EmployeeDetail.objects.get(pk=pk)
+    emp.delete()
+    return render( request, "admin/all_employee.html")
+
+ 
+def admin_emp_view_detail(request, pk):
+    if not request.user.is_authenticated:
+        return redirect("admin_login")
+    employee = EmployeeDetail.objects.all( )
+    
+    return render(request, 'admin/emp_profile_view.html', {'employee': employee})
