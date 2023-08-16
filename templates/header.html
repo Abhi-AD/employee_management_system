@@ -1,5 +1,5 @@
     <!-- header section strats -->
-    <header class="header_section">
+  <header class="header_section">
      <div class="container-fluid">
        <nav class="navbar navbar-expand-lg custom_nav-container ">
          <a class="navbar-brand" href="index.html">
@@ -16,10 +16,10 @@
          <div class="collapse navbar-collapse" id="navbarSupportedContent">
            <ul class="navbar-nav  ml-auto">
              <li class="nav-item active">
-               <a class="nav-link" href="index.html">Home</a>
+               <a class="nav-link" href="/"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
              </li>
              <li class="nav-item">
-               <a class="nav-link" href="about.html"> About</a>
+               <a class="nav-link" href="{% url 'about' %}"><i class="fa fa-about" aria-hidden="true"></i> About</a>
              </li>
              <li class="nav-item">
                <a class="nav-link" href="job.html">Jobs</a>
@@ -57,4 +57,5 @@
        </nav>
      </div>
    </header>
+
    <!-- end header section -->

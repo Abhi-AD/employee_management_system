@@ -2,40 +2,53 @@ from django.shortcuts import render, redirect,get_object_or_404
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
+from django.views import View
 
 
 # Create your views here.
 
 
-def index(request):
-    return render(request, "index.html")
+class IndexView(View):
+    def get(self, request):
+        return render(request, "index.html")
+    
+    
+    
+class AboutView(View):
+    def get(self, request):
+        return render(request, "about.html")
 
 
-def registration(request):
-    error = ""
-    if request.method == "POST":
-        firstname = request.POST["firstname"]
-        lastname = request.POST["lastname"]
-        empcode = request.POST["empcode"]
-        email = request.POST["email"]
-        password = request.POST["password"]
+class RegistrationView(View):
+    template_name = 'registration.html'
 
-        try:
-            user = User.objects.create_user(
-                first_name=firstname,
-                last_name=lastname,
-                username=email,
-                password=password,
-            )
-            EmployeeDetail.objects.create(user=user, empcode=empcode)
-            EmployeeExperience.objects.create(user=user)
-            EmployeeEducation.objects.create(user=user)
-            error = "no"
-        except:
-            error = "yes"
+    def get(self, request):
+        return render(request, self.template_name)
 
-    return render(request, "registration.html", locals())
+    def post(self, request):
+        error = ""
+        if request.method == "POST":
+            firstname = request.POST.get("firstname")
+            lastname = request.POST.get("lastname")
+            empcode = request.POST.get("empcode")
+            email = request.POST.get("email")
+            password = request.POST.get("password")
 
+            try:
+                user = User.objects.create_user(
+                    first_name=firstname,
+                    last_name=lastname,
+                    username=email,
+                    password=password,
+                )
+                EmployeeDetail.objects.create(user=user, empcode=empcode)
+                EmployeeExperience.objects.create(user=user)
+                EmployeeEducation.objects.create(user=user)
+                error = "no"
+            except:
+                error = "yes"
+
+        return render(request, self.template_name, {'error': error})
 
 def emp_login(request):
     error = ""
