@@ -20,8 +20,8 @@ from employee_app.views import *
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", index, name="index"),
-    path("registration/", registration, name="registration"),
+    path("", IndexView.as_view(), name="index"),
+    path("registration/", RegistrationView.as_view(), name="registration"),
     path("emp_login/", emp_login, name="emp_login"),
     path("emp_home/", emp_home, name="emp_home"),
     path("emp_profile/", emp_profile, name="emp_profile"),
@@ -37,6 +37,10 @@ urlpatterns = [
     path("all_employee/",all_employee, name="all_employee"),
     path("emp_delete/<int:pk>/",emp_delete, name="emp_delete"),
     path("admin_emp_view_detail/<int:pk>/",admin_emp_view_detail, name="admin_emp_view_detail"),
+    
+    # template website
+    path("about/", AboutView.as_view(), name="about")
+    
     
     
     
