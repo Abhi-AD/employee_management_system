@@ -16,6 +16,7 @@ class IndexView(View):
     
 class AboutView(View):
     def get(self, request):
+<<<<<<< HEAD
         return render(request, "jobs/about.html")
     
 class JobView(View):
@@ -25,6 +26,9 @@ class JobView(View):
 class FreelancerView(View):
     def get(self, request):
         return render(request, "jobs/freelancer.html")
+=======
+        return render(request, "about.html")
+>>>>>>> ddaffbb3220a64fdaa214e233e0242f7177c4fb7
 
 
 class RegistrationView(View):

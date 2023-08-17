@@ -21,9 +21,12 @@ from employee_app.views import *
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", IndexView.as_view(), name="index"),
+<<<<<<< HEAD
     path("about/", AboutView.as_view(), name="about"),
     path("job/", JobView.as_view(), name="job"),
     path("freelancer/", FreelancerView.as_view(), name="freelancer"),
+=======
+>>>>>>> ddaffbb3220a64fdaa214e233e0242f7177c4fb7
     path("registration/", RegistrationView.as_view(), name="registration"),
     path("emp_login/", emp_login, name="emp_login"),
     path("emp_home/", emp_home, name="emp_home"),
