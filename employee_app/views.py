@@ -1,40 +1,62 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from .models import *
+from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
+from django.views import View
 
 
 # Create your views here.
 
 
-def index(request):
-    return render(request, "index.html")
+class IndexView(View):
+    def get(self, request):
+        return render(request, "index.html")
+    
+    
+    
+class AboutView(View):
+    def get(self, request):
+        return render(request, "jobs/about.html")
+    
+class JobView(View):
+    def get(self, request):
+        return render(request, "jobs/job.html")
+    
+class FreelancerView(View):
+    def get(self, request):
+        return render(request, "jobs/freelancer.html")
 
 
-def registration(request):
-    error = ""
-    if request.method == "POST":
-        firstname = request.POST["firstname"]
-        lastname = request.POST["lastname"]
-        empcode = request.POST["empcode"]
-        email = request.POST["email"]
-        password = request.POST["password"]
+class RegistrationView(View):
+    template_name = 'registration.html'
 
-        try:
-            user = User.objects.create_user(
-                first_name=firstname,
-                last_name=lastname,
-                username=email,
-                password=password,
-            )
-            EmployeeDetail.objects.create(user=user, empcode=empcode)
-            EmployeeExperience.objects.create(user=user)
-            EmployeeEducation.objects.create(user=user)
-            error = "no"
-        except:
-            error = "yes"
+    def get(self, request):
+        return render(request, self.template_name)
 
-    return render(request, "registration.html", locals())
+    def post(self, request):
+        error = ""
+        if request.method == "POST":
+            firstname = request.POST.get("firstname")
+            lastname = request.POST.get("lastname")
+            empcode = request.POST.get("empcode")
+            email = request.POST.get("email")
+            password = request.POST.get("password")
 
+            try:
+                user = User.objects.create_user(
+                    first_name=firstname,
+                    last_name=lastname,
+                    username=email,
+                    password=password,
+                )
+                EmployeeDetail.objects.create(user=user, empcode=empcode)
+                EmployeeExperience.objects.create(user=user)
+                EmployeeEducation.objects.create(user=user)
+                error = "no"
+            except:
+                error = "yes"
+
+        return render(request, self.template_name, {'error': error})
 
 def emp_login(request):
     error = ""
@@ -99,10 +121,6 @@ def emp_logout(request):
     return redirect("index")
 
 
-def admin_login(request):
-    return render(request, "admin/admin_login.html")
-
-
 def emp_experiences(request):
     if not request.user.is_authenticated:
         return redirect("emp_login")
@@ -134,22 +152,20 @@ def emp_edit_experiences(request):
         third_comany_duration = request.POST["third_comany_duration"]
         third_comany_years = request.POST["third_comany_years"]
 
-
         experience.first_comany_name = first_comany_name
         experience.first_comany_designation = first_comany_designation
         experience.first_comany_duration = first_comany_duration
-        experience.first_comany_years = first_comany_years   
-             
+        experience.first_comany_years = first_comany_years
+
         experience.second_comany_name = second_comany_name
         experience.second_comany_designation = second_comany_designation
         experience.second_comany_duration = second_comany_duration
-        experience.second_comany_years = second_comany_years   
-             
-        experience.third_comany_name =third_comany_name
+        experience.second_comany_years = second_comany_years
+
+        experience.third_comany_name = third_comany_name
         experience.third_comany_designation = third_comany_designation
         experience.third_comany_duration = third_comany_duration
         experience.third_comany_years = third_comany_years
-
 
         try:
             experience.save()
@@ -168,6 +184,8 @@ def emp_education(request):
 
 
 from django.core.exceptions import ObjectDoesNotExist
+
+
 def emp_edit_education(request):
     if not request.user.is_authenticated:
         return redirect("emp_login")
@@ -193,33 +211,31 @@ def emp_edit_education(request):
         schoolssc = request.POST["schoolssc"]
         yearofpassingssc = request.POST["yearofpassingssc"]
         percentagessc = request.POST["percentagessc"]
-        
+
         coursehsc = request.POST["coursehsc"]
         schoolhsc = request.POST["schoolhsc"]
         yearofpassinghsc = request.POST["yearofpassinghsc"]
         percentagehsc = request.POST["percentagehsc"]
 
-
         education.coursepg = coursepg
         education.schoolpg = schoolpg
         education.yearofpassingpg = yearofpassingpg
-        education.percentagepg = percentagepg   
-             
+        education.percentagepg = percentagepg
+
         education.coursegra = coursegra
         education.schoolgra = schoolgra
         education.yearofpassinggra = yearofpassinggra
         education.percentagegra = percentagegra
-             
+
         education.coursessc = coursessc
         education.schoolssc = schoolssc
         education.yearofpassingssc = yearofpassingssc
         education.percentagessc = percentagessc
-        
+
         education.coursehsc = coursehsc
         education.schoolhsc = schoolhsc
         education.yearofpassinghsc = yearofpassinghsc
         education.percentagehsc = percentagehsc
-
 
         try:
             education.save()
@@ -237,17 +253,146 @@ def change_password(request):
     error = ""
     user = request.user
     if request.method == "POST":
-        currentpassword = request.POST['currentpassword']
-        newpassword = request.POST['newpassword']
-        
-        
+        currentpassword = request.POST["currentpassword"]
+        newpassword = request.POST["newpassword"]
+
         try:
             if user.check_password(currentpassword):
                 user.set_password(newpassword)
                 user.save()
                 error = "no"
-            else :
-                error = "not"      
+            else:
+                error = "not"
         except:
             error = "yes"
     return render(request, "emp/emp_change_password.html", locals())
+
+
+def admin_login(request):
+    error = ""
+    if request.method == "POST":
+        username1 = request.POST["username"]
+        pass1 = request.POST["password"]
+        user = authenticate(username=username1, password=pass1)
+        try:
+            
+            if user.is_staff:
+                login(request, user)
+                error = "no"
+            else:
+                error = "yes"
+        except:
+            error = "yes"
+
+    return render(request, "admin/admin_login.html", locals())
+
+
+def admin_home(request):
+    if not request.user.is_authenticated:
+        return redirect("admin_login")
+    return render(request, "admin/admin_home.html")
+
+
+
+def admin_change_password(request):
+    if not request.user.is_authenticated:
+        return redirect("admin_login")
+    error = ""
+    user = request.user
+    if request.method == "POST":
+        currentpassword = request.POST["currentpassword"]
+        newpassword = request.POST["newpassword"]
+
+        try:
+            if user.check_password(currentpassword):
+                user.set_password(newpassword)
+                user.save()
+                error = "no"
+            else:
+                error = "not"
+        except:
+            error = "yes"
+    return render(request, "admin/admin_change_password.html", locals())
+
+
+def all_employee(request):
+    if not request.user.is_authenticated:
+        return redirect("admin_login")
+    employee = EmployeeDetail.objects.all()
+    return render(request, "admin/all_employee.html", locals())
+
+
+
+
+def edit_admin_education(request):
+    if not request.user.is_authenticated:
+        return redirect("emp_login")
+    error = ""
+    user = request.user
+    try:
+        education = EmployeeEducation.objects.get(user=user)
+    except ObjectDoesNotExist:
+        education = EmployeeEducation(user=user)
+
+    if request.method == "POST":
+        coursepg = request.POST["coursepg"]
+        schoolpg = request.POST["schoolpg"]
+        yearofpassingpg = request.POST["yearofpassingpg"]
+        percentagepg = request.POST["percentagepg"]
+
+        coursegra = request.POST["coursegra"]
+        schoolgra = request.POST["schoolgra"]
+        yearofpassinggra = request.POST["yearofpassinggra"]
+        percentagegra = request.POST["percentagegra"]
+
+        coursessc = request.POST["coursessc"]
+        schoolssc = request.POST["schoolssc"]
+        yearofpassingssc = request.POST["yearofpassingssc"]
+        percentagessc = request.POST["percentagessc"]
+
+        coursehsc = request.POST["coursehsc"]
+        schoolhsc = request.POST["schoolhsc"]
+        yearofpassinghsc = request.POST["yearofpassinghsc"]
+        percentagehsc = request.POST["percentagehsc"]
+
+        education.coursepg = coursepg
+        education.schoolpg = schoolpg
+        education.yearofpassingpg = yearofpassingpg
+        education.percentagepg = percentagepg
+
+        education.coursegra = coursegra
+        education.schoolgra = schoolgra
+        education.yearofpassinggra = yearofpassinggra
+        education.percentagegra = percentagegra
+
+        education.coursessc = coursessc
+        education.schoolssc = schoolssc
+        education.yearofpassingssc = yearofpassingssc
+        education.percentagessc = percentagessc
+
+        education.coursehsc = coursehsc
+        education.schoolhsc = schoolhsc
+        education.yearofpassinghsc = yearofpassinghsc
+        education.percentagehsc = percentagehsc
+
+        try:
+            education.save()
+            error = "no"
+        except:
+            error = "yes"
+    return render(request, "admin/admin_education_update.html", locals())
+
+def emp_delete(request, pk):
+    if not request.user.is_authenticated:
+        return redirect("admin_login")
+    emp = EmployeeDetail.objects.get(pk=pk)
+    emp.delete()
+    return render( request, "admin/all_employee.html")
+
+ 
+def admin_emp_view_detail(request, pk):
+    if not request.user.is_authenticated:
+        return redirect("admin_login")
+    employee = EmployeeDetail.objects.all( )
+    
+    return render(request, 'admin/emp_profile_view.html', {'employee': employee})
