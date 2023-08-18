@@ -1,69 +1,105 @@
 {% extends "admin/admin_base.html" %}
 {% block main %}
-<div class="card shadow m-2">
-     <div class="card-body">
-          <h2 class="p-2 text-secondary">Details</h2>
-
-          <div class="container-fluid">
-               <form action="" method="post" name="signup">
-                    {% csrf_token %}
-                    
-                    {% for employee in employee %}                        
-                    <div class="form-row">
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">First Name:{{employee.user.first_name}}</label>
+{% load static %}
+<h2 class="p-2 text-secondary">Details</h2>
+<section style="background-color: #eee;">
+     <div class="container py-5">
+          <form action="" method="post" name="signup">
+               {% csrf_token %}
+               {% for employee in employee %}
+               <div class="row">
+                    <div class="col-lg-4">
+                         <div class="card mb-4">
+                              <div class="card-body text-center">
+                                   <img src="{% static 'img/1.png'  %}" alt="avatar" class="rounded-circle img-fluid"
+                                        style="width: 550px;">
+                                   <h5 class="my-3">{{employee.user.first_name}} {{employee.user.last_name}}</h5>
+                                   <p class="text-muted mb-1">Employee Designation:{{employee.designation}}</p>
+                                   <p class="text-muted mb-4">Employee Department:{{employee.empdept}}</p>
                               </div>
-                         </div>
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">Last Name:{{employee.user.last_name}}</label>
-                              </div>
-                         </div>
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">Employee Code:{{employee.empcode}}</label>
-                              </div>
-                         </div>
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">Employee Designation:{{employee.designation}}</label>
-                              </div>
-
-                              <div class="col-sm-6">
-                                   <div class="form-group">
-                                        <label for="">Employee Department:{{employee.empdept}}</label>
-                                   </div>
-                              </div>
-                              <div class="col-sm-6">
-                                   <div class="form-group">
-                                        <label for="">Email ID: {{employee.user.username}}</label>
-                                   </div>
-                              </div>
-                              <div class="col-sm-6">
-                                   <div class="form-group">
-                                        <label for="">Contact:{{employee.contact}}</label>
-                                   </div>
-                              </div>
-                              <div class="col-sm-6">
-                                   <div class="form-group">
-                                        <label for="">Joining Date:{{employee.join_date}}</label>
-                                   </div>
-                              </div>
-                              <div class="col-sm-6">
-                                   <div class="form-group">
-                                        <label for="">Gender:{{employee.gender}}</label>
-                                   </div>
-                              </div>
-
                          </div>
                     </div>
-                    {% endfor %}
-
-
-                    <input type="submit" value="Submit" class="m-4 px-3 btn btn-success">
-               </form>
-          </div>
+                    <div class="col-lg-8">
+                         <div class="card mb-4">
+                              <div class="card-body">
+                                   <div class="row">
+                                        <div class="col-sm-3">
+                                             <p class="mb-0">Full Name</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                             <p class="text-muted mb-0">{{employee.user.first_name}}
+                                                  {{employee.user.last_name}}</p>
+                                        </div>
+                                   </div>
+                                   <hr>
+                                   <div class="row">
+                                        <div class="col-sm-3">
+                                             <p class="mb-0">Employee Code</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                             <p class="text-muted mb-0">{{employee.empcode}}</p>
+                                        </div>
+                                   </div>
+                                   <hr>
+                                   <div class="row">
+                                        <div class="col-sm-3">
+                                             <p class="mb-0">Email</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                             <p class="text-muted mb-0">{{employee.user.username}}</p>
+                                        </div>
+                                   </div>
+                                   <hr>
+                                   <div class="row">
+                                        <div class="col-sm-3">
+                                             <p class="mb-0">Contact</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                             <p class="text-muted mb-0">{{employee.contact}}</p>
+                                        </div>
+                                   </div>
+                                   <hr>
+                                   <div class="row">
+                                        <div class="col-sm-3">
+                                             <p class="mb-0">Gender</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                             <p class="text-muted mb-0">{{employee.gender}}</p>
+                                        </div>
+                                   </div>
+                                   <hr>
+                                   <div class="row">
+                                        <div class="col-sm-3">
+                                             <p class="mb-0">Employee Designation</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                             <p class="text-muted mb-0">{{employee.designation}}</p>
+                                        </div>
+                                   </div>
+                                   <hr>
+                                   <div class="row">
+                                        <div class="col-sm-3">
+                                             <p class="mb-0">Join Date</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                             <p class="text-muted mb-0">{{employee.join_date}}</p>
+                                        </div>
+                                   </div>
+                                   <hr>
+                                   <div class="row">
+                                        <div class="col-sm-3">
+                                             <p class="mb-0">Employee Department</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                             <p class="text-muted mb-0">{{employee.empdept}}</p>
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+               {% endfor %}
+          </form>
      </div>
-</div>
+</section>
 {% endblock main %}
