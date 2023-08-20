@@ -3,6 +3,8 @@ from web_app.forms import CustomerForm
 from django.views import View
 from django.contrib.auth.models import *
 from web_app.model import *
+from .forms import ResumeForm
+
 
 
 # Create your views here.
@@ -19,6 +21,19 @@ class FreelancerView(View):
         return render(request, "jobs/freelancer.html")
 
 
+
+def jobapply(request):
+    if request.method == 'POST':
+        form = ResumeForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('Your Job Application is successfully submitted')
+    else:
+        form = ResumeForm()
+        context = {
+            'form':form,
+        }
+    return render(request, 'apply_form.html', context)
 
 def customer(request):
     if request.method == 'POST':
@@ -41,19 +56,3 @@ def customer(request):
 
 
 
-from .forms import ResumeForm
-
-# Create your views here.
-
-def jobapply(request):
-    if request.method == 'POST':
-        form = ResumeForm(request.POST,request.FILES)
-        if form.is_valid():
-            form.save()
-            return HttpResponse('Your Job Application is successfully submitted')
-    else:
-        form = ResumeForm()
-        context = {
-            'form':form,
-        }
-    return render(request, 'apply_form.html', context)

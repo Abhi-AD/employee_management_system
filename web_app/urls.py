@@ -7,6 +7,6 @@ urlpatterns = [
     path("about/", AboutView.as_view(), name="about"),
     path("job/", JobView.as_view(), name="job"),
     path("freelancer/", FreelancerView.as_view(), name="freelancer"),
-    path("apply/", customer, name="apply"),
+    path("apply/", jobapply, name="apply"),
     
 ]

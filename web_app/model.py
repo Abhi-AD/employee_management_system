@@ -54,6 +54,7 @@ class Resume(models.Model):
     state = models.CharField(max_length=20)
     resume = models.FileField(upload_to='Job_apply/resumes/%Y/%m/%d', blank=False)
     letter = models.FileField(upload_to='Job_apply/letter/%Y/%m/%d', blank=False)
+    quailfation = models.FileField(upload_to='Job_apply/quailfation/%Y/%m/%d', blank=False)
     apply_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

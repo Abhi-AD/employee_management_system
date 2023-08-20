@@ -4,11 +4,14 @@ from web_app.model import *
 
 
 CITY_CHOICES =(
-    ("1", "New York"),
-    ("2", "Washington"),
-    ("3", "Los Angeles"),
-    ("4", "Houston"),
-    ("5", "Las Vegas"),
+    ("0","Select Provinces"),
+    ("1", "Koshi"),
+    ("2", "Madhesh"),
+    ("3", "Bagmati"),
+    ("4", "Gandaki"),
+    ("5", "Lumbini"),
+    ("6", "Karnali"),
+    ("7", "Sudurpashchim"),
 )
 
 class CustomerForm(forms.Form):
@@ -20,6 +23,7 @@ class CustomerForm(forms.Form):
     phone = forms.IntegerField()
 
 select_gender = (
+    ("select gender","Select gender"),
     ("male", "Male"),
     ("female", "Female"),
     ("other", "Other"),
@@ -58,8 +62,8 @@ class ResumeForm(forms.ModelForm):
         model = Resume
         fields = '__all__'
         widgets = {
-            "gender": forms.RadioSelect(choices=select_gender),
+            "gender": forms.Select(choices=select_gender),
             "date_of_birth": DateInput,
-            "city": forms.Select(choices=select_city),
+            "city": forms.Select(choices=CITY_CHOICES),
             "state": forms.Select(choices=select_state),
         }
