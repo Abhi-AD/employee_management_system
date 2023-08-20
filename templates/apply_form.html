@@ -1,0 +1,36 @@
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Job Application</title>
+     <style>
+         table {
+             border: 8px outset;
+             border-radius: 10px;
+             border-spacing: 10px;
+             padding: 20px;
+             margin-left: auto;
+             margin-right: auto;
+         }
+     </style>
+ </head>
+ 
+ <body>
+     <h1 align="center">Job Application</h1>
+     <hr>
+     <h3 align="center">Please complete the form below to apply for a position with us.</h3>
+     <hr>
+     <br>
+     <form method="post" enctype="multipart/form-data">
+         {% csrf_token %}
+         <table>
+             {{form.as_table}}
+         </table>
+         <br><br>
+         <div style="text-align:center">
+             <input type="submit" />
+         </div>
+     </form>
+ </body>
+ 
+ </html>
