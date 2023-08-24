@@ -7,3 +7,5 @@ button.addEventListener("click",() =>{
      accordion.style.display = "block"
      accordion.style.transition=".5s ease-in-out"
 })
+
+

@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.views import View
+from django.contrib import messages
 
 
 # Create your views here.
@@ -11,11 +12,10 @@ from django.views import View
 class IndexView(View):
     def get(self, request):
         return render(request, "index.html")
-    
 
 
 class RegistrationView(View):
-    template_name = 'registration.html'
+    template_name = "registration.html"
 
     def get(self, request):
         return render(request, self.template_name)
@@ -43,7 +43,8 @@ class RegistrationView(View):
             except:
                 error = "yes"
 
-        return render(request, self.template_name, {'error': error})
+        return render(request, self.template_name, {"error": error})
+
 
 def emp_login(request):
     error = ""
@@ -232,8 +233,6 @@ def emp_edit_education(request):
     return render(request, "emp/emp_details/emp_education_update.html", locals())
 
 
-
-
 def change_password(request):
     if not request.user.is_authenticated:
         return redirect("emp_login")
@@ -262,7 +261,6 @@ def admin_login(request):
         pass1 = request.POST["password"]
         user = authenticate(username=username1, password=pass1)
         try:
-            
             if user.is_staff:
                 login(request, user)
                 error = "no"
@@ -275,14 +273,14 @@ def admin_login(request):
 
 
 def admin_home(request):
-    if not request.user.is_authenticated:
+    # user = request.user
+    if not request.user.is_superuser:
         return redirect("admin_login")
     return render(request, "admin/admin_home.html")
 
 
-
 def admin_change_password(request):
-    if not request.user.is_authenticated:
+    if not request.user.is_superuser:
         return redirect("admin_login")
     error = ""
     user = request.user
@@ -303,12 +301,10 @@ def admin_change_password(request):
 
 
 def all_employee(request):
-    if not request.user.is_authenticated:
+    if not request.user.is_superuser:
         return redirect("admin_login")
     employee = EmployeeDetail.objects.all()
     return render(request, "admin/all_employee.html", locals())
-
-
 
 
 def edit_admin_education(request):
@@ -369,17 +365,21 @@ def edit_admin_education(request):
             error = "yes"
     return render(request, "admin/admin_education_update.html", locals())
 
-def emp_delete(request, pk):
-    if not request.user.is_authenticated:
-        return redirect("admin_login")
-    emp = EmployeeDetail.objects.get(pk=pk)
-    emp.delete()
-    return render( request, "admin/all_employee.html")
 
- 
+
+
+def emp_delete(request, pk):
+    user = User.objects.get(pk=pk)
+
+    if request.method == "POST":
+        user.delete()
+        messages.success(request, "User has been deleted")
+    return render(request, "admin/all_employee.html", {"user": user})
+
+
 def admin_emp_view_detail(request, pk):
-    if not request.user.is_authenticated:
+    if not request.user.is_superuser:
         return redirect("admin_login")
-    employee = EmployeeDetail.objects.all( )
-    
-    return render(request, 'admin/emp_profile_view.html', {'employee': employee})
+    employee = EmployeeDetail.objects.all()
+
+    return render(request, "admin/emp_profile_view.html", {"employee": employee})
