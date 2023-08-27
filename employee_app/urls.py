@@ -4,7 +4,6 @@ from employee_app.views import *
 
 
 urlpatterns = [
-     path("", IndexView.as_view(), name="index"),
     path("registration/", RegistrationView.as_view(), name="registration"),
     path("emp_login/", emp_login, name="emp_login"),
     path("emp_home/", emp_home, name="emp_home"),

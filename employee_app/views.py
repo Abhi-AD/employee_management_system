@@ -9,10 +9,6 @@ from django.contrib import messages
 # Create your views here.
 
 
-class IndexView(View):
-    def get(self, request):
-        return render(request, "index.html")
-
 
 class RegistrationView(View):
     template_name = "registration.html"

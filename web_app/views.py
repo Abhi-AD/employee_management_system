@@ -1,24 +1,41 @@
 from django.shortcuts import render,HttpResponse
-from web_app.forms import CustomerForm
+from web_app.forms import CustomerForm,ResumeForm
 from django.views import View
 from django.contrib.auth.models import *
 from web_app.model import *
-from .forms import ResumeForm
+from datetime import timedelta
+from django.utils import timezone
+from django.views.generic import ListView, TemplateView, View, DetailView
 
 
 
 # Create your views here.
-class AboutView(View):
-    def get(self, request):
-        return render(request, "jobs/about.html")
+class HomeView(ListView):
+    model = JobPosting
+    template_name = "index.html"
+    context_object_name = "posts"
+    queryset = JobPosting.objects.filter(
+        posted_at__isnull=False, status="active"
+    ).order_by("-posted_at")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["recent_posts"] = JobPosting.objects.filter(
+            posted_at__isnull=False, status="active"
+        ).order_by("-posted_at")[:4]
+        context["featured_posts"] = JobPosting.objects.filter(
+            posted_at__isnull=False, status="active"
+        ).order_by("-posted_at")[:4]
+        return context
     
-class JobView(View):
-    def get(self, request):
-        return render(request, "jobs/job.html")
+class AboutView(TemplateView):
+     template_name = "jobs/about.html"
     
-class FreelancerView(View):
-    def get(self, request):
-        return render(request, "jobs/freelancer.html")
+class JobView(TemplateView):
+    template_name =  "jobs/job.html"
+    
+class FreelancerView(TemplateView):
+    template_name = "jobs/freelancer.html"
 
 
 
