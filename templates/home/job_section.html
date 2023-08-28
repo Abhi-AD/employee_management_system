@@ -1,6 +1,6 @@
 {% load static %}
- <!-- job section -->
- <section class="job_section layout_padding">
+<!-- job section -->
+<section class="job_section layout_padding">
   <div class="container">
     <div class="heading_container heading_center">
       <h2>
@@ -12,7 +12,6 @@
         Featured Jobs
       </h4>
       <div class="row">
-        
         {% for featured_post in featured_posts %}
         <div class="col-lg-6">
           <div class="box">
@@ -38,7 +37,7 @@
                     </span>
                   </h6>
                   <h6>
-                    <i class="fa fa-calendar-alt" ></i>
+                    <i class="fa fa-calendar-alt"></i>
                     <span>{{featured_post.posted_at|date:" D, j M Y"}}
                     </span>
                   </h6>
@@ -52,15 +51,14 @@
             </div>
           </div>
         </div>
-        {% endfor %}  
-          
+        {% endfor %}
       </div>
     </div>
     <div class="job_container">
       <h4 class="job_heading">
         Recent Jobs
       </h4>
-      <div class="row">        
+      <div class="row">
         {% for recent_post in recent_posts %}
         <div class="col-lg-6">
           <div class="box">
@@ -86,7 +84,7 @@
                     </span>
                   </h6>
                   <h6>
-                    <i class="fa fa-calendar-alt" ></i>
+                    <i class="fa fa-calendar-alt"></i>
                     <span>{{recent_post.posted_at|date:" D, j M Y"}}
                     </span>
                   </h6>
@@ -100,7 +98,7 @@
             </div>
           </div>
         </div>
-        {% endfor %}                 
+        {% endfor %}
       </div>
     </div>
     <div class="btn-box">
@@ -110,4 +108,4 @@
     </div>
   </div>
 </section>
-   <!-- end job section -->
+<!-- end job section -->

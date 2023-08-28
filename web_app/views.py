@@ -25,7 +25,7 @@ class HomeView(ListView):
         ).order_by("-posted_at")[:4]
         context["featured_posts"] = JobPosting.objects.filter(
             posted_at__isnull=False, status="active"
-        ).order_by("-posted_at")[:4]
+        ).order_by("-posted_at")[:2]
         return context
     
 class AboutView(TemplateView):

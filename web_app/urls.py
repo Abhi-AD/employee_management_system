@@ -4,8 +4,7 @@ from web_app.views import *
 
 
 urlpatterns = [
-    path("", HomeView.as_view(), name="index"),
-         
+    path("", HomeView.as_view(), name="index"),         
     path("about/", AboutView.as_view(), name="about"),
     path("job/", JobView.as_view(), name="job"),
     path("freelancer/", FreelancerView.as_view(), name="freelancer"),
