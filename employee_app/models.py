@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 class EmployeeDetail(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    feature_image = models.ImageField(upload_to="EMP_images/%Y/%m/%d", blank=False)
     empcode = models.IntegerField(null=True)
     empdept = models.CharField(max_length=50, null=True)
     designation = models.CharField(max_length=100, null=True)

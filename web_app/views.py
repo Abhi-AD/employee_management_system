@@ -3,6 +3,7 @@ from web_app.forms import CustomerForm,ResumeForm
 from django.views import View
 from django.contrib.auth.models import *
 from web_app.model import *
+from employee_app.models import *
 from datetime import timedelta
 from django.utils import timezone
 from django.views.generic import ListView, TemplateView, View, DetailView
@@ -34,8 +35,17 @@ class AboutView(TemplateView):
 class JobView(TemplateView):
     template_name =  "jobs/job.html"
     
-class FreelancerView(TemplateView):
+class FreelancerView(ListView):
+    model = EmployeeDetail
     template_name = "jobs/freelancer.html"
+    queryset = EmployeeDetail.objects.filter(
+    ).order_by("-join_date")
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["freelancer_posts"] = EmployeeDetail.objects.filter(
+        ).order_by("-join_date")[:3]
+        return context
 
 
 
