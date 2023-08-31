@@ -33,7 +33,21 @@ class AboutView(TemplateView):
      template_name = "jobs/about.html"
     
 class JobView(TemplateView):
+    model = JobPosting
     template_name =  "jobs/job.html"
+    queryset = JobPosting.objects.filter(
+        posted_at__isnull=False, status="active"
+    ).order_by("-posted_at")
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["recent_posts"] = JobPosting.objects.filter(
+            posted_at__isnull=False, status="active"
+        ).order_by("-posted_at")[:4]
+        context["featured_posts"] = JobPosting.objects.filter(
+            posted_at__isnull=False, status="active"
+        ).order_by("-posted_at")[:2]
+        return context
     
 class FreelancerView(ListView):
     model = EmployeeDetail

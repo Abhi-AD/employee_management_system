@@ -16,42 +16,46 @@
         Featured Jobs
       </h4>
       <div class="row">
+        {% for featured_post in featured_posts %}
         <div class="col-lg-6">
           <div class="box">
             <div class="job_content-box">
               <div class="img-box">
-                <img src="{% static 'jobs/images/job_logo1.png' %}" alt="">
+                <img src="{{featured_post.feature_image.url}}" alt="{{ featured_post.title}}">
               </div>
               <div class="detail-box">
                 <h5>
-                  Development Team Lead
+                  {{featured_post.title}}
                 </h5>
                 <div class="detail-info">
                   <h6>
                     <i class="fa fa-map-marker" aria-hidden="true"></i>
                     <span>
-                      Washington. D.C.
+                      {{featured_post.category.name}}
                     </span>
                   </h6>
                   <h6>
                     <i class="fa fa-money" aria-hidden="true"></i>
                     <span>
-                      $1200 - $1300
+                      ${{featured_post.salary}}
+                    </span>
+                  </h6>
+                  <h6>
+                    <i class="fa fa-calendar-alt"></i>
+                    <span>{{featured_post.posted_at|date:" D, j M Y"}}
                     </span>
                   </h6>
                 </div>
               </div>
             </div>
             <div class="option-box">
-              <button class="fav-btn">
-                <i class="fa fa-heart-o" aria-hidden="true"></i>
-              </button>
-              <a href="" class="apply-btn">
+              <a href="{% url 'apply' %}" class="apply-btn">
                 Apply Now
               </a>
             </div>
           </div>
         </div>
+        {% endfor %}
       </div>
     </div>
     <div class="job_container">
@@ -59,7 +63,6 @@
         Recent Jobs
       </h4>
       <div class="row">
-        
         {% for recent_post in recent_posts %}
         <div class="col-lg-6">
           <div class="box">
@@ -75,7 +78,7 @@
                   <h6>
                     <i class="fa fa-map-marker" aria-hidden="true"></i>
                     <span>
-                      {{recent_post.location.name}}
+                      {{recent_post.category.name}}
                     </span>
                   </h6>
                   <h6>
@@ -84,18 +87,22 @@
                       ${{recent_post.salary}}
                     </span>
                   </h6>
+                  <h6>
+                    <i class="fa fa-calendar-alt"></i>
+                    <span>{{recent_post.posted_at|date:" D, j M Y"}}
+                    </span>
+                  </h6>
                 </div>
               </div>
             </div>
             <div class="option-box">
-              <a href="" class="apply-btn">
+              <a href="{% url 'apply' %}" class="apply-btn">
                 Apply Now
               </a>
             </div>
           </div>
         </div>
         {% endfor %}
-                 
       </div>
     </div>
     <div class="btn-box">
