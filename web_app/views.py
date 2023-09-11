@@ -12,7 +12,7 @@ from django.views.generic import ListView, TemplateView, View, DetailView
 
 # Create your views here.
 class HomeView(ListView):
-    model = JobPosting
+    model = JobPosting,EmployeeDetail
     template_name = "index.html"
     context_object_name = "posts"
     queryset = JobPosting.objects.filter(
@@ -27,6 +27,8 @@ class HomeView(ListView):
         context["featured_posts"] = JobPosting.objects.filter(
             posted_at__isnull=False, status="active"
         ).order_by("-posted_at")[:2]
+        context["freelancer_posts"] = EmployeeDetail.objects.filter(
+        ).order_by("-join_date")[:3]
         return context
     
 class AboutView(TemplateView):
