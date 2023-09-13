@@ -1,4 +1,5 @@
 from django.shortcuts import render,HttpResponse
+from django.http import JsonResponse
 from web_app.forms import CustomerForm,ResumeForm
 from django.views import View
 from django.contrib.auth.models import *
@@ -67,15 +68,22 @@ class FreelancerView(ListView):
 
 def jobapply(request):
     if request.method == 'POST':
-        form = ResumeForm(request.POST,request.FILES)
+        form = ResumeForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponse('Your Job Application is successfully submitted')
+            return JsonResponse({'message': 'Your Job Application is successfully submitted'})
+        else:
+            # Handle form validation errors here if needed.
+            errors = form.errors
+            return JsonResponse({'message': 'Form validation failed', 'errors': errors}, status=400)
+
     else:
         form = ResumeForm()
-        context = {
-            'form':form,
-        }
+
+    context = {
+        'form': form,
+    }
+
     return render(request, 'apply_form.html', context)
 
 def customer(request):
