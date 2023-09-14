@@ -23,22 +23,23 @@
                <form>
                  <div class="form-row ">
                    <div class="form-group col-lg-3">
-                     <input type="text" class="form-control" id="inputPatientName" placeholder="Keywords">
+                     <input type="text" class="form-control" id="inputPatientName" placeholder="JobSearching">
                    </div>
                    <div class="form-group col-lg-3">
                      <select name="" class="form-control wide" id="inputDoctorName">
-                       <option value="Normal distribution ">All Locations</option>
-                       <option value="Normal distribution ">Location 2 </option>
-                       <option value="Normal distribution ">Location 3 </option>
+                      <option value="Normal distribution ">All locations </option>
+                       {% for locations in locations %}
+                       <option value="Normal distribution ">{{locations.name}}</option>                      
+                       {% endfor %}
+                        
                      </select>
                    </div>
                    <div class="form-group col-lg-3">
                      <select name="" class="form-control wide" id="inputDepartmentName">
-                       <option value="Normal distribution ">SEO Expert </option>
-                       <option value="Normal distribution ">Web Designer </option>
-                       <option value="Normal distribution ">Web Developer</option>
-                       <option value="Normal distribution ">Graphic Deesigner</option>
-                       <option value="Normal distribution ">Content Writer</option>
+                      <option value="Normal distribution ">All department</option>            
+                      {% for department in department %}              
+                      <option value="Normal distribution ">{{department.title}}</option>
+                      {% endfor %}
                      </select>
                    </div>
                    <div class="form-group col-lg-3">
@@ -50,7 +51,7 @@
                </form>
              </div>
            </div>
-           <ul class="job_check_list">
+           <!-- <ul class="job_check_list">
              <li class=" ">
                <input id="checkbox_qu_01" type="checkbox" class="styled-checkbox">
                <label for="checkbox_qu_01">
@@ -69,7 +70,7 @@
                  Full Time
                </label>
              </li>
-           </ul>
+           </ul> -->
          </div>
        </div>
      </div>

@@ -46,14 +46,16 @@ select_city = (
 )
 
 select_state = (
-    ("new york", "New York"),
-    ("california", "California"),
-    ("iiiinois", "IIIinois"),
-    ("texas", "Texas"),
-    ("arizona", "Arizona"),
-    ("massachusetts", "Massachusetts"),
-    ("nevada", "Nevada"),
-    ("south carolina", "South Carolina"),   
+    ("Kathmandu", "ktm"),
+    ("Pokhara", "pokhara"),
+    ("houston", "Houston"),
+    ("chicago", "Chicago"),
+    ("phoenix", "Phoenix"),
+    ("austin", "Austin"),
+    ("boston", "Boston"),
+    ("las vegas", "Las Vegas"),
+    ("columbia", "Columbia"),
+    ("waco", "Waco"),
 )
 
 
