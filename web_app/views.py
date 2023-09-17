@@ -10,6 +10,23 @@ from django.utils import timezone
 from django.views.generic import ListView, TemplateView, View, DetailView
 
 
+from django.shortcuts import render, redirect
+from .forms import SubscriberForm
+
+def subscribe(request):
+    if request.method == 'POST':
+        form = SubscriberForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # You can add a success message here
+            return redirect('success')
+    else:
+        form = SubscriberForm()
+    return render(request, 'home/newsletter/subscribe.html', {'form': form})
+
+def success(request):
+    return render(request, 'home/newsletter/success.html')
+
 
 # Create your views here.
 class HomeView(ListView):
