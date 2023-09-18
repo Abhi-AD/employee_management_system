@@ -1,87 +1,102 @@
 {% load static %}
- <!-- info section -->
- <section class="info_section ">
-     <div class="container">
-       <div class="row">
-         <div class="col-md-2 info_links">
-           <h4>
-             Menu
-           </h4>
-           <ul>
-             <li class="active">
-               <a href="/">
-                 Home
-               </a>
-             </li>
-             <li>
-               <a href="{% url 'about' %}">
-                 About
-               </a>
-             </li>
-             <li>
-               <a class="" href="{% url 'job' %}">
-                 Jobs
-               </a>
-             </li>
-             <li>
-               <a class="" href="{% url 'freelancer' %}">
-                 Freelancers
-               </a>
-             </li>
-           </ul>
-         </div>
-         <div class="col-md-3">
-           <h4>
-             Jobs
-           </h4>
-           <p>
-             Established fact that a reader will be distracted by the readable content of a page when looking at its
-             layout. The point of using Lorem Ipsum
-           </p>
-         </div>
-         <div class="col-md-3">
-           <div class="info_social">
-             <h4>
-               Social Link
-             </h4>
-             <div class="social_container">
-               <div>
-                 <a href="">
-                  <i class="fa-brands fa-facebook-f"></i>
-                 </a>
-               </div>
-               <div>
-                 <a href="">
-                  <i class="fa-brands fa-twitter"></i>
-                 </a>
-               </div>
-               <div>
-                 <a href="">
-                   <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-                 </a>
-               </div>
-               <div>
-                 <a href="">
-                   <i class="fa-brands fa-instagram" aria-hidden="true"></i>
-                 </a>
-               </div>
-             </div>
-           </div>
-         </div>
-         <div class="col-md-4">
-           <div class="info_form">
-             <h4>
-               Newsletter
-             </h4>
-             <form action="">
-               <input type="text" placeholder="Enter Your Email" />
-               <button type="submit">
-                 Subscribe
-               </button>
-             </form>
-           </div>
-         </div>
-       </div>
-     </div>
-   </section>
-   <!-- end info_section -->
+<!-- info section -->
+<section class="info_section ">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2 info_links">
+        <h4>
+          Menu
+        </h4>
+        <ul>
+          <li class="active">
+            <a href="/">
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'about' %}">
+              About
+            </a>
+          </li>
+          <li>
+            <a class="" href="{% url 'job' %}">
+              Jobs
+            </a>
+          </li>
+          <li>
+            <a class="" href="{% url 'freelancer' %}">
+              Freelancers
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h4>
+          Jobs
+        </h4>
+        <p>
+          Established fact that a reader will be distracted by the readable content of a page when looking at its
+          layout. The point of using Lorem Ipsum
+        </p>
+      </div>
+      <div class="col-md-3">
+        <div class="info_social">
+          <h4>
+            Social Link
+          </h4>
+          <div class="social_container">
+            <div>
+              <a href="">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+            </div>
+            <div>
+              <a href="">
+                <i class="fa-brands fa-twitter"></i>
+              </a>
+            </div>
+            <div>
+              <a href="">
+                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+              </a>
+            </div>
+            <div>
+              <a href="">
+                <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="info_form">
+          <h4>
+            Newsletter
+          </h4>
+          <div id="newsletter_bottom_message"></div>
+          <!-- Form -->
+          <div class="footer-form">
+            <div id="mc_embed_signup">
+              <form action="" method="post" class="subscribe_form relative mail_part" id="newsletter_bottom_form">
+                {% csrf_token %}
+                <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
+                  class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                  onblur="this.placeholder = ' Email Address '">
+                <div class="form-icon">
+                  <button type="submit" name="submit" id="newsletter-submit"
+                    class="email_icon newsletter-submit button-contactForm"><img src="{% static 'img/form-iocn.png' %}"
+                      alt="">Subsribe</button>
+                </div>
+                <div class="mt-10 info"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+</section>
+<!-- end info_section -->

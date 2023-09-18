@@ -10,6 +10,5 @@ urlpatterns = [
     path("job/", JobView.as_view(), name="job"),
     path("freelancer/", FreelancerView.as_view(), name="freelancer"),
     path("apply/", jobapply, name="apply"),
-    path('subscribe/', views.subscribe, name='subscribe'),
-    path('success/', views.success, name='success'),
+    path("newsletter/", views.NewlettersView.as_view(), name = "newsletter"),
 ]

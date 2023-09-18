@@ -3,10 +3,10 @@ from web_app.model import *
 from django import forms
 from web_app.model import Subscriber
 
-class SubscriberForm(forms.ModelForm):
-    class Meta:
-        model = Subscriber
-        fields = ['email']
+class NewsletterForm(forms.ModelForm):
+     class Meta:
+          model = Subscriber
+          fields= "__all__"
 
 
 CITY_CHOICES =(

@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponse
 from django.http import JsonResponse
-from web_app.forms import CustomerForm,ResumeForm
+from web_app.forms import CustomerForm,ResumeForm,NewsletterForm
 from django.views import View
 from django.contrib.auth.models import *
 from web_app.model import *
@@ -10,25 +10,20 @@ from django.utils import timezone
 from django.views.generic import ListView, TemplateView, View, DetailView
 
 
-from django.shortcuts import render, redirect
-from .forms import SubscriberForm
-
-def subscribe(request):
-    if request.method == 'POST':
-        form = SubscriberForm(request.POST)
-        if form.is_valid():
-            form.save()
-            # You can add a success message here
-            return redirect('success')
-    else:
-        form = SubscriberForm()
-    return render(request, 'home/newsletter/subscribe.html', {'form': form})
-
-def success(request):
-    return render(request, 'home/newsletter/success.html')
-
-
 # Create your views here.
+class NewlettersView(View):
+    def post(self, request):
+        is_ajax = request.headers.get('x-requested-with')
+        if is_ajax == 'XMLHttpRequest':
+            form = NewsletterForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return JsonResponse({"sucess":True, "message":"Sucessfully subscribed to the news letters.",},status=200,)
+            else:
+                return JsonResponse({"sucess":False, "message":"cannot subscribed to the news letters.",},status=404,)
+        else:
+            return JsonResponse({"sucess":False, "message":"SUcessfully subscribed to the news letters.",},status=400,)
+        
 class HomeView(ListView):
     model = JobPosting,EmployeeDetail,JobLocation
     template_name = "index.html"
