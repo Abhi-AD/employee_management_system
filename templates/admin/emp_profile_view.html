@@ -11,8 +11,10 @@
                     <div class="col-lg-4">
                          <div class="card mb-4">
                               <div class="card-body text-center">
-                                   <img src="{% static 'img/1.png'  %}" alt="avatar" class="rounded-circle img-fluid"
-                                        style="width: 550px;">
+                                   {% for freelancer_post in freelancer_posts %}
+                                   <img src="{{freelancer_post.feature_image.url }}" alt="avatar"
+                                        class="rounded-circle img-fluid" style="width: 550px;">
+                                        {%endfor%}
                                    <h5 class="my-3">{{employee.user.first_name}} {{employee.user.last_name}}</h5>
                                    <p class="text-muted mb-1">Employee Designation:{{employee.designation}}</p>
                                    <p class="text-muted mb-4">Employee Department:{{employee.empdept}}</p>
