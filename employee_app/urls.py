@@ -18,7 +18,7 @@ urlpatterns = [
     path("admin_home/", admin_home, name="admin_home"),
     path("admin_change_password/",admin_change_password, name="admin_change_password"),
     path("all_employee/",all_employee, name="all_employee"),
-    path("emp_delete/<int:pk>/",emp_delete, name="emp_delete"),
+    path('employee/<int:pk>/delete/', EmployeeProfileDeleteView.as_view(), name='employee_profile_delete'),
     path("admin_emp_view_detail/<int:pk>/",admin_emp_view_detail, name="admin_emp_view_detail"),
     
     

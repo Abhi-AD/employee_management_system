@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import *
+from employee_app.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.views import View
@@ -363,19 +363,16 @@ def edit_admin_education(request):
 
 
 
+from django.views.generic.edit import DeleteView
+from django.urls import reverse_lazy
 
-def emp_delete(request, pk):
-    user = User.objects.get(pk=pk)
-
-    if request.method == "POST":
-        user.delete()
-        messages.success(request, "User has been deleted")
-    return render(request, "admin/all_employee.html", {"user": user})
-
+class EmployeeProfileDeleteView(DeleteView):
+    model = EmployeeDetail
+    template_name = 'employee_profile_confirm_delete.html'
+    success_url = reverse_lazy('employee_profile_list') 
 
 def admin_emp_view_detail(request, pk):
     if not request.user.is_superuser:
         return redirect("admin_login")
-    employee = EmployeeDetail.objects.all()
-
+    employee = EmployeeDetail.objects.get(id=pk)
     return render(request, "admin/emp_profile_view.html", {"employee": employee})
