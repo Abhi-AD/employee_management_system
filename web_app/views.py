@@ -11,19 +11,7 @@ from django.views.generic import ListView, TemplateView, View, DetailView
 
 
 # Create your views here.
-class NewlettersView(View):
-    def post(self, request):
-        is_ajax = request.headers.get('x-requested-with')
-        if is_ajax == 'XMLHttpRequest':
-            form = NewsletterForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return JsonResponse({"sucess":True, "message":"Sucessfully subscribed to the news letters.",},status=200,)
-            else:
-                return JsonResponse({"sucess":False, "message":"cannot subscribed to the news letters.",},status=404,)
-        else:
-            return JsonResponse({"sucess":False, "message":"SUcessfully subscribed to the news letters.",},status=400,)
-        
+       
 class HomeView(ListView):
     model = JobPosting,EmployeeDetail,JobLocation
     template_name = "index.html"
@@ -146,6 +134,19 @@ def customer(request):
     return render(request, "forms.html", {'form':form})
 
 
+
+class NewlettersView(View):
+    def post(self, request):
+        is_ajax = request.headers.get('x-requested-with')
+        if is_ajax == 'XMLHttpRequest':
+            form = NewsletterForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return JsonResponse({"sucess":True, "message":"Sucessfully subscribed to the news letters.",},status=200,)
+            else:
+                return JsonResponse({"sucess":False, "message":"cannot subscribed to the news letters.",},status=404,)
+        else:
+            return JsonResponse({"sucess":False, "message":"SUcessfully subscribed to the news letters.",},status=400,)
 
 
 

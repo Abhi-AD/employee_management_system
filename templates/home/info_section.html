@@ -79,19 +79,21 @@
             <div id="mc_embed_signup">
               <form action="" method="post" class="subscribe_form relative mail_part" id="newsletter_bottom_form">
                 {% csrf_token %}
-                <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
-                  class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
-                  onblur="this.placeholder = ' Email Address '">
+                <div class="form-group">
+                  <input type="email" class="form-control" onfocus="this.placeholder = ''"
+                       onblur="this.placeholder = 'Enter email'" placeholder='Enter email' name="email" required>
+             </div>
                 <div class="form-icon">
                   <button type="submit" name="submit" id="newsletter-submit"
-                    class="email_icon newsletter-submit button-contactForm"><img src="{% static 'img/form-iocn.png' %}"
-                      alt="">Subsribe</button>
+                    class="email_icon newsletter-submit button-contactForm"><img src="{% static 'img/form-iocn.png' %}" style="margin-left: -40px;"
+                    alt="">Subsribe</button>
                 </div>
                 <div class="mt-10 info"></div>
               </form>
             </div>
           </div>
         </div>
+        
       </div>
     </div>
   </div>

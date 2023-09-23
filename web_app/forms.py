@@ -1,11 +1,10 @@
 from django import forms
 from web_app.model import *
 from django import forms
-from web_app.model import Subscriber
 
 class NewsletterForm(forms.ModelForm):
      class Meta:
-          model = Subscriber
+          model = Newsletter
           fields= "__all__"
 
 
