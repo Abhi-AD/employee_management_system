@@ -46,6 +46,33 @@ class HomeView(ListView):
         context["locations"] = JobLocation.objects.all()       
         context["department"] = JobPosting.objects.all()       
         return context
+ 
+ 
+class JobAllView(ListView):
+    model = JobPosting
+    template_name = "jobs/job_all.html"
+    context_object_name = "posts"
+    queryset = JobPosting.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)      
+        context["featured_posts"] = JobPosting.objects.filter(
+            posted_at__isnull=False, status="active"
+        ).order_by("-posted_at")      
+        return context   
+    
+class ExpertAllView(ListView):
+    model = EmployeeDetail
+    template_name = "jobs/expert_all.html"
+    context_object_name = "posts"
+    queryset = EmployeeDetail.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)      
+        context["expert_all"] = EmployeeDetail.objects.filter().order_by("-join_date")      
+        return context   
+    
+    
     
 class AboutView(TemplateView):
      template_name = "jobs/about.html"

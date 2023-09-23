@@ -11,4 +11,6 @@ urlpatterns = [
     path("freelancer/", FreelancerView.as_view(), name="freelancer"),
     path("apply/", jobapply, name="apply"),
     path("newsletter/", views.NewlettersView.as_view(), name = "newsletter"),
+    path("job_all/", JobAllView.as_view(), name = "job_all"),
+    path("expert_all/", ExpertAllView.as_view(), name = "expert_all"),
 ]

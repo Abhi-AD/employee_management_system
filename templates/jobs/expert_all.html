@@ -14,7 +14,7 @@
     </div>
     <div class="row">
       
-      {% for freelancer_post in freelancer_posts %}
+      {% for freelancer_post in expert_all %}
       <div class="col-md-6 col-lg-4 mx-auto">
         <div class="box">
           <div class="img-box">
@@ -47,11 +47,6 @@
       </div>
       {% endfor %}
         
-    </div>
-    <div class="btn-box">
-      <a href="{% url 'expert_all' %}">
-        View All Freelancers
-      </a>
     </div>
   </div>
 </section>
