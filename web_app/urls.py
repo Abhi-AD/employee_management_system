@@ -13,4 +13,5 @@ urlpatterns = [
     path("newsletter/", views.NewlettersView.as_view(), name = "newsletter"),
     path("job_all/", JobAllView.as_view(), name = "job_all"),
     path("expert_all/", ExpertAllView.as_view(), name = "expert_all"),
+    path("job-post-search", PostSearchView.as_view(), name="job-post-search")
 ]

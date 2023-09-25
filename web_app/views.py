@@ -36,6 +36,40 @@ class HomeView(ListView):
         return context
  
  
+
+from django.core.paginator import PageNotAnInteger, Paginator
+from django.db.models import Q
+from django.http import JsonResponse
+
+class PostSearchView(View):
+    template_name = "home/search.html"
+
+    def get(self, request, *args, **kwargs):
+        query = request.GET["query"]
+        post_list = JobPosting.objects.filter(
+            (Q(title__icontains=query))
+            & Q(status="active")
+            & Q(posted_at__isnull=False)
+        ).order_by("-posted_at")
+
+        # paginator start
+        page = request.GET.get("page", 1)
+        paginator_by = 1
+        paginator = Paginator(post_list, paginator_by)
+        try:
+            posts = paginator.page(page)
+
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+
+        # paginations end'
+        return render(
+            request,
+            self.template_name,
+            {"page_obj": posts, "query": query},
+        )
+
+ 
 class JobAllView(ListView):
     model = JobPosting
     template_name = "jobs/job_all.html"

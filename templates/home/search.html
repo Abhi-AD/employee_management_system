@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'header.html' %}
+{% include "home/silder_section.html" %}
+<!-- job section -->
+
+<section class="job_section layout_padding">
+  <div class="container">
+    <div class="job_container">
+      <div class="row">
+        {% for recent_post in recent_posts %}
+        <div class="col-lg-6">
+          <div class="box">
+            <div class="job_content-box">
+              <div class="img-box">
+                <img src="{{recent_post.feature_image.url}}" alt="{{ recent_post.title}}">
+              </div>
+              <div class="detail-box">
+                <h5>
+                  {{recent_post.title}}
+                </h5>
+                <div class="detail-info">
+                  <h6>
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    <span>
+                      {{recent_post.category.name}}
+                    </span>
+                  </h6>
+                  <h6>
+                    <i class="fa fa-money" aria-hidden="true"></i>
+                    <span>
+                      ${{recent_post.salary}}
+                    </span>
+                  </h6>
+                  <h6>
+                    <i class="fa fa-calendar-alt"></i>
+                    <span>{{recent_post.posted_at|date:" D, j M Y"}}
+                    </span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="option-box">
+              <a href="{% url 'apply' %}" class="apply-btn">
+                Apply Now
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="btn-box">
+      <a href="{% url 'job_all' %}">
+        View All
+      </a>
+    </div>
+  </div>
+</section>
+<!-- end job section -->
+
+{% include 'home/info_section.html' %}
+{% include 'home/footer_section.html' %}
+{% endblock content %}

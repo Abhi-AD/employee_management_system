@@ -1,0 +1,98 @@
+{% extends "admin/admin_base.html" %}
+{% block main %}
+{% load static %}
+<h2 class="p-2 text-secondary">Details</h2>
+<section style="background-color: #eee;">
+     <div class="container py-5">
+          <form action="" method="post" name="signup">
+               {% csrf_token %}
+               <div class="row">
+                    <div class="col-lg-4">
+                         <div class="card mb-4">
+                              <div class="card-body text-center">
+                                   <!-- <img src="{{employee.feature_image.url }}" alt="avatar"
+                                        class="rounded-circle img-fluid" style="width: 550px;"> -->
+                                   <img src="{{employee.feature_image.url }}" alt="{{freelancer_post.title}}"
+                                        height="380px">
+                                   <h5 class="my-3">{{employee.title}}</h5>
+                                   <p class="text-muted mb-1">Location:{{employee.location}}</p>
+                                   <p class="text-muted mb-4">Department:{{employee.category}}</p>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="col-lg-8">
+                         <div class="card mb-4">
+                              <div class="card-body">
+                                   <div class="row">
+                                        <div class="col-sm-3">
+                                             <p class="mb-0">Full Name</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                             <p class="text-muted mb-0">{{employee.title}}</p>
+                                        </div>
+                                   </div>
+                                   <hr>
+                                   <div class="row">
+                                        <div class="col-sm-3">
+                                             <p class="mb-0">Company</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                             <p class="text-muted mb-0">{{employee.company}}</p>
+                                        </div>
+                                   </div>
+                                   <hr>
+                                   <div class="row">
+                                        <div class="col-sm-3">
+                                             <p class="mb-0">Description</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                             <p class="text-muted mb-0">{{employee.description}}</p>
+                                        </div>
+                                   </div>
+                                   <hr>
+                                   <div class="row">
+                                        <div class="col-sm-3">
+                                             <p class="mb-0">Salary</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                             <p class="text-muted mb-0">${{employee.salary}}</p>
+                                        </div>
+                                   </div>
+                                   <hr>
+                                   <div class="row">
+                                        <div class="col-sm-3">
+                                             <p class="mb-0">Job Post Date</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                             <p class="text-muted mb-0">{{employee.posted_at}}</p>
+                                        </div>
+                                   </div>
+                                   <hr>
+                                   <div class="row">
+                                        <div class="col-sm-3">
+                                             <p class="mb-0">Location</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                             <p class="text-muted mb-0">{{employee.location}}</p>
+                                        </div>
+                                   </div>
+                                   <hr>
+                                   <div class="row">
+                                        <div class="col-sm-3">
+                                             <p class="mb-0">Views_count</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                             <p class="text-muted mb-0">{{employee.views_count}}</p>
+                                        </div>
+                                   </div>
+                                   <hr>
+
+                              </div>
+                         </div>
+                    </div>
+               </div>
+
+          </form>
+     </div>
+</section>
+{% endblock main %}

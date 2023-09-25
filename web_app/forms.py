@@ -8,6 +8,11 @@ class NewsletterForm(forms.ModelForm):
           fields= "__all__"
 
 
+class JobPostingForm(forms.ModelForm):
+    class Meta:
+        model = JobPosting
+        fields = '__all__' 
+
 CITY_CHOICES =(
     ("0","Select Provinces"),
     ("1", "Koshi"),

@@ -20,10 +20,11 @@
          <div class="container">
            <div class="row">
              <div class="col">
-               <form>
+               <form action="{% url 'job-post-search' %}" method="get">
                  <div class="form-row ">
                    <div class="form-group col-lg-3">
-                     <input type="text" class="form-control" id="inputPatientName" placeholder="JobSearching">
+                    {% csrf_token%}
+                     <input type="text" class="form-control" id="inputPatientName" placeholder="Search Job" name="query">
                    </div>
                    <div class="form-group col-lg-3">
                      <select name="" class="form-control wide" id="inputDoctorName">

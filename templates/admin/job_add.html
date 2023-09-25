@@ -1,0 +1,33 @@
+{% extends "admin/admin_base.html" %}
+{% block main %}
+<script>
+     function checkpassword() {
+          if (document.signup.password.value != document.signup.conformpassword.value) {
+               alert('Password And Conform password is doesnot match');
+               document.signup.conformpassword.focus();
+               return false;
+          }
+          return true;
+     }
+</script>
+
+<div class="card shadow m-5">
+     <div class="card-body">
+          <h2 class="p-2 text-secondary">Create Job</h2>
+
+          <form method="post" enctype="multipart/form-data">
+               {% csrf_token %}
+               {{ form.as_p }}
+               <button type="submit">Submit</button>
+           </form>
+     </div>
+</div>
+
+
+     
+
+
+
+
+
+{% endblock main %}

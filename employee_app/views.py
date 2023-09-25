@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from employee_app.models import *
+from web_app.model import *
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.views import View
 from django.contrib import messages
+from django.http import HttpResponse
+from web_app.forms import *
 
 
 # Create your views here.
@@ -41,6 +44,48 @@ class RegistrationView(View):
 
         return render(request, self.template_name, {"error": error})
 
+
+class NewEmployeeRegistrationView(View):
+    template_name = "admin/registration.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+    def post(self, request):
+        error = ""
+        if request.method == "POST":
+            firstname = request.POST.get("firstname")
+            lastname = request.POST.get("lastname")
+            empcode = request.POST.get("empcode")
+            email = request.POST.get("email")
+            password = request.POST.get("password")
+
+            try:
+                user = User.objects.create_user(
+                    first_name=firstname,
+                    last_name=lastname,
+                    username=email,
+                    password=password,
+                )
+                EmployeeDetail.objects.create(user=user, empcode=empcode)
+                EmployeeExperience.objects.create(user=user)
+                EmployeeEducation.objects.create(user=user)
+                error = "no"
+            except:
+                error = "yes"
+
+        return render(request, self.template_name, {"error": error})
+
+def add_job_posting(request):
+    if request.method == 'POST':
+        form = JobPostingForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('all_job')  # Redirect to a job list page after successful submission
+    else:
+        form = JobPostingForm()
+
+    return render(request, 'admin/job_add.html', {'form': form})
 
 def emp_login(request):
     error = ""
@@ -302,6 +347,42 @@ def all_employee(request):
     employee = EmployeeDetail.objects.all()
     return render(request, "admin/all_employee.html", locals())
 
+def all_job(request):
+    if not request.user.is_superuser:
+        return redirect("admin_login")
+    employee = JobPosting.objects.all()
+    return render(request, "admin/all_job.html", locals())
+
+def admin_job_view_detail(request, pk):
+    if not request.user.is_superuser:
+        return redirect("admin_login")
+    employee = JobPosting.objects.get(id=pk)
+    return render(request, "admin/job_profile_view.html", {"employee": employee})
+
+
+def emp_profile_delete(request, pk):    
+    if not request.user.is_superuser:
+        return redirect("admin_login")
+    try:
+        post = EmployeeDetail.objects.get(pk=pk)
+        post.delete()
+        return HttpResponse("User deleted successfully", status=200)
+    except Exception as e:
+        # Handle exceptions or errors
+        return HttpResponse("An error occurred", status=500)
+
+def job_post_delete(request, pk):    
+    if not request.user.is_superuser:
+        return redirect("admin_login")
+    try:
+        post = JobPosting.objects.get(pk=pk)
+        post.delete()
+        return HttpResponse("Post deleted successfully", status=200)
+    except Exception as e:
+        # Handle exceptions or errors
+        return HttpResponse("An error occurred", status=500)
+
+
 
 def edit_admin_education(request):
     if not request.user.is_authenticated:
@@ -363,13 +444,7 @@ def edit_admin_education(request):
 
 
 
-from django.views.generic.edit import DeleteView
-from django.urls import reverse_lazy
 
-class EmployeeProfileDeleteView(DeleteView):
-    model = EmployeeDetail
-    template_name = 'employee_profile_confirm_delete.html'
-    success_url = reverse_lazy('employee_profile_list') 
 
 def admin_emp_view_detail(request, pk):
     if not request.user.is_superuser:
