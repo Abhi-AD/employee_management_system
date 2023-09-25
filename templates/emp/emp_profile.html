@@ -2,7 +2,24 @@
 {% block main %}
 <div class="card shadow m-2">
      <div class="card-body">
-          <h2 class="p-2 text-secondary">Profile Details</h2>
+          <div class="row">
+               <h2 class="p-2 text-secondary">Profile Details</h2>
+               <div class="col-md-2">
+                    <img src="{{employee.feature_image.url }}" alt="Images" height="100" width="100"
+                         class="img-thumbnail  my-5 d-flex">
+               </div>
+               <div class="col-md-10">
+                    <h6 class="col-sm-6 form-group form-row">Name:{{employee.user.first_name}}
+                         {{employee.user.last_name}}</h6>
+                    <h6 class="col-sm-6 form-group form-row">Designation:{{employee.designation}}</h6>
+                    <h6 class="col-sm-6 form-group form-row">Department:{{employee.empdept}}</h6>
+                    <h6 class="col-sm-6 form-group form-row">Joining:{{employee.join_date}}</h6>
+                    <h6 class="col-sm-6 form-group form-row">Gender:{{employee.gender}}</h6>
+
+               </div>
+               
+          </div>
+
 
           <div class="container-fluid">
                <form action="" method="post" name="signup">
@@ -11,38 +28,43 @@
                          <div class="col-sm-6">
                               <div class="form-group">
                                    <label for="">First Name</label>
-                                   <input type="text" name="firstname" class="form-control" value="{{employee.user.first_name}}">
+                                   <input type="text" name="firstname" class="form-control"
+                                        value="{{employee.user.first_name}}">
                               </div>
                          </div>
                          <div class="col-sm-6">
                               <div class="form-group">
                                    <label for="">Last Name</label>
-                                   <input type="text" name="lastname" class="form-control"value="{{employee.user.last_name}}">
+                                   <input type="text" name="lastname" class="form-control"
+                                        value="{{employee.user.last_name}}">
                               </div>
                          </div>
                          <div class="col-sm-6">
                               <div class="form-group">
                                    <label for="">Employee Code</label>
-                                   <input type="text" name="empcode" class="form-control"value="{{employee.empcode}}">
+                                   <input type="text" name="empcode" class="form-control" value="{{employee.empcode}}">
                               </div>
                          </div>
                          <div class="col-sm-6">
                               <div class="form-group">
                                    <label for="">Employee Designation</label>
-                                   <input type="text" name="designation" class="form-control"value="{{employee.designation}}">
+                                   <input type="text" name="designation" class="form-control"
+                                        value="{{employee.designation}}">
                               </div>
                          </div>
 
                          <div class="col-sm-6">
                               <div class="form-group">
                                    <label for="">Employee Department</label>
-                                   <input type="text" name="department" class="form-control" value="{{employee.empdept}}">
+                                   <input type="text" name="department" class="form-control"
+                                        value="{{employee.empdept}}">
                               </div>
                          </div>
                          <div class="col-sm-6">
                               <div class="form-group">
                                    <label for="">Email ID</label>
-                                   <input type="email" name="emailid" class="form-control" value="{{employee.user.username}}">
+                                   <input type="email" name="emailid" class="form-control"
+                                        value="{{employee.user.username}}">
                               </div>
                          </div>
                          <div class="col-sm-6">
