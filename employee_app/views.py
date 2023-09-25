@@ -144,6 +144,42 @@ def emp_profile(request):
 
     return render(request, "emp/emp_profile.html", locals())
 
+def emp_profile_edit(request):
+    if not request.user.is_authenticated:
+        return redirect("emp_login")
+    error = ""
+    user = request.user
+    employee = EmployeeDetail.objects.get(user=user)
+    if request.method == "POST":
+        firstname = request.POST["firstname"]
+        lastname = request.POST["lastname"]
+        empcode = request.POST["empcode"]
+        department = request.POST["department"]
+        designation = request.POST["designation"]
+        gender = request.POST["gender"]
+        contact = request.POST["contact"]
+        jdate = request.POST["jdate"]
+
+        employee.user.first_name = firstname
+        employee.user.last_name = lastname
+        employee.empcode = empcode
+        employee.contact = contact
+        employee.designation = designation
+        employee.empdept = department
+        employee.gender = gender
+
+        if jdate:
+            employee.join_date = jdate
+
+        try:
+            employee.save()
+            employee.user.save()
+            error = "no"
+        except:
+            error = "yes"
+
+    return render(request, "emp/emp_profile_edit.html", locals())
+
 
 def emp_logout(request):
     logout(request)

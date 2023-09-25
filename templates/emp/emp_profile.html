@@ -17,100 +17,11 @@
                     <h6 class="col-sm-6 form-group form-row">Gender:{{employee.gender}}</h6>
 
                </div>
-               
-          </div>
-
-
-          <div class="container-fluid">
-               <form action="" method="post" name="signup">
-                    {% csrf_token %}
-                    <div class="form-row">
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">First Name</label>
-                                   <input type="text" name="firstname" class="form-control"
-                                        value="{{employee.user.first_name}}">
-                              </div>
-                         </div>
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">Last Name</label>
-                                   <input type="text" name="lastname" class="form-control"
-                                        value="{{employee.user.last_name}}">
-                              </div>
-                         </div>
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">Employee Code</label>
-                                   <input type="text" name="empcode" class="form-control" value="{{employee.empcode}}">
-                              </div>
-                         </div>
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">Employee Designation</label>
-                                   <input type="text" name="designation" class="form-control"
-                                        value="{{employee.designation}}">
-                              </div>
-                         </div>
-
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">Employee Department</label>
-                                   <input type="text" name="department" class="form-control"
-                                        value="{{employee.empdept}}">
-                              </div>
-                         </div>
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">Email ID</label>
-                                   <input type="email" name="emailid" class="form-control"
-                                        value="{{employee.user.username}}">
-                              </div>
-                         </div>
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">Contact</label>
-                                   <input type="text" name="contact" class="form-control"
-                                        placeholder="Enter a your contact" value="{{employee.contact}}">
-                              </div>
-                         </div>
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">Joining Date[{{employee.join_date}}]</label>
-                                   <input type="date" name="jdate" class="form-control">
-                              </div>
-                         </div>
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">Gender</label>
-                                   <select name="gender" class="form-control">
-                                        <option value="none">Select Gender[{{employee.gender}}]</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                   </select>
-                              </div>
-                         </div>
-
-                    </div>
-                    <input type="submit" value="Submit" class="m-4 px-3 btn btn-success">
-               </form>
+               <a href="{% url 'emp_profile_edit' %}" class="btn btn-primary ">EDIT</a>
           </div>
      </div>
 </div>
 
-{% if error == "no" %}
-<script>
-     alert("Profile update Successfully");
-     window.location = "{% url 'emp_profile'%}";  // Redirecting to other page (add)
-</script>
-{% endif %}
-
-{% if error == "yes" %}
-<script>
-     alert('Please Enter Correct Details');
-</script>
-
-{% endif %}
 
 
 
