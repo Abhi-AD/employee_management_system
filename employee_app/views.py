@@ -13,6 +13,7 @@ from web_app.forms import *
 
 
 
+
 class RegistrationView(View):
     template_name = "registration.html"
 
@@ -21,28 +22,27 @@ class RegistrationView(View):
 
     def post(self, request):
         error = ""
-        if request.method == "POST":
-            firstname = request.POST.get("firstname")
-            lastname = request.POST.get("lastname")
-            empcode = request.POST.get("empcode")
-            email = request.POST.get("email")
-            password = request.POST.get("password")
+        firstname = request.POST.get("firstname")
+        lastname = request.POST.get("lastname")
+        empcode = request.POST.get("empcode")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        feature_image = request.FILES.get("feature_image")  
 
-            try:
-                user = User.objects.create_user(
-                    first_name=firstname,
-                    last_name=lastname,
-                    username=email,
-                    password=password,
-                )
-                EmployeeDetail.objects.create(user=user, empcode=empcode)
-                EmployeeExperience.objects.create(user=user)
-                EmployeeEducation.objects.create(user=user)
-                error = "no"
-            except:
-                error = "yes"
+        try:
+            user = User.objects.create_user(
+                username=email,
+                password=password,
+                first_name=firstname,
+                last_name=lastname,
+            )
+            EmployeeDetail.objects.create(user=user, empcode=empcode, feature_image=feature_image)
+            error = "no"
+        except Exception as e:
+            error = "yes"
 
         return render(request, self.template_name, {"error": error})
+
 
 
 class NewEmployeeRegistrationView(View):
@@ -59,6 +59,8 @@ class NewEmployeeRegistrationView(View):
             empcode = request.POST.get("empcode")
             email = request.POST.get("email")
             password = request.POST.get("password")
+            feature_image = request.FILES.get("feature_image")  
+            
 
             try:
                 user = User.objects.create_user(
@@ -67,7 +69,7 @@ class NewEmployeeRegistrationView(View):
                     username=email,
                     password=password,
                 )
-                EmployeeDetail.objects.create(user=user, empcode=empcode)
+                EmployeeDetail.objects.create(user=user, empcode=empcode, feature_image=feature_image)
                 EmployeeExperience.objects.create(user=user)
                 EmployeeEducation.objects.create(user=user)
                 error = "no"
@@ -75,6 +77,8 @@ class NewEmployeeRegistrationView(View):
                 error = "yes"
 
         return render(request, self.template_name, {"error": error})
+
+
 
 def add_job_posting(request):
     if request.method == 'POST':
@@ -123,6 +127,8 @@ def emp_profile(request):
         gender = request.POST["gender"]
         contact = request.POST["contact"]
         jdate = request.POST["jdate"]
+        feature_image = request.FILES.get("feature_image")  
+        
 
         employee.user.first_name = firstname
         employee.user.last_name = lastname
@@ -131,6 +137,7 @@ def emp_profile(request):
         employee.designation = designation
         employee.empdept = department
         employee.gender = gender
+        employee.feature_image = feature_image
 
         if jdate:
             employee.join_date = jdate
@@ -159,6 +166,7 @@ def emp_profile_edit(request):
         gender = request.POST["gender"]
         contact = request.POST["contact"]
         jdate = request.POST["jdate"]
+        feature_image = request.POST["feature_image"]
 
         employee.user.first_name = firstname
         employee.user.last_name = lastname
@@ -167,6 +175,7 @@ def emp_profile_edit(request):
         employee.designation = designation
         employee.empdept = department
         employee.gender = gender
+        employee.feature_image = feature_image
 
         if jdate:
             employee.join_date = jdate
@@ -396,16 +405,20 @@ def admin_job_view_detail(request, pk):
     return render(request, "admin/job_profile_view.html", {"employee": employee})
 
 
-def emp_profile_delete(request, pk):    
-    if not request.user.is_superuser:
-        return redirect("admin_login")
-    try:
-        post = EmployeeDetail.objects.get(pk=pk)
-        post.delete()
-        return HttpResponse("User deleted successfully", status=200)
-    except Exception as e:
-        # Handle exceptions or errors
-        return HttpResponse("An error occurred", status=500)
+# def emp_profile_delete(request, pk):    
+#     if not request.user.is_superuser:
+#         return redirect("admin_login")
+#     try:
+#         post = EmployeeDetail.objects.get(pk=pk)
+#         post.delete()
+#         return HttpResponse("User deleted successfully", status=200)
+#     except Exception as e:
+#         # Handle exceptions or errors
+#         return HttpResponse("An error occurred", status=500)
+
+
+
+
 
 def job_post_delete(request, pk):    
     if not request.user.is_superuser:

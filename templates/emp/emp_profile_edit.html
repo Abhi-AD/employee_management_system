@@ -3,10 +3,16 @@
 <div class="card shadow m-2">
      <div class="card-body">
           <div class="row">
-               <h2 class="p-2 text-secondary">Profile EDIT</h2>
+               <div class="col-md-6">
+                    <h2 class="p-2 text-secondary">Profile Details</h2>
+               </div>
+               <div class="col-md-6 text-end">
+                    <a href="{% url 'emp_profile' %}" class="btn btn-primary">Show Profile</a>
+               </div>
                <div class="col-md-2">
                     <img src="{{employee.feature_image.url }}" alt="Images" height="100" width="100"
                          class="img-thumbnail  my-5 d-flex">
+
                </div>
                <div class="col-md-10">
                     <h6 class="col-sm-6 form-group form-row">Name:{{employee.user.first_name}}
@@ -17,7 +23,7 @@
                     <h6 class="col-sm-6 form-group form-row">Gender:{{employee.gender}}</h6>
 
                </div>
-               
+
           </div>
 
 
@@ -88,6 +94,12 @@
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                    </select>
+                              </div>
+                         </div>
+                         <div class="col-sm-6">
+                              <div class="form-group">
+                                   <label for="formFile" class="form-label">Image Upload</label>
+                                   <input class="form-control" type="file" id="formFile"name="feature_image">
                               </div>
                          </div>
 
