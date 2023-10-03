@@ -39,8 +39,8 @@
                               <td>{{i.user.username}}</td>
                               <td>{{i.contact}}</td>
                               <td>{{i.join_date}}</td>
-                              <td><a href="/admin_emp_view_detail/{{i.pk}}/" class="btn btn-primary"><i class="fa-solid fa-circle-user"></i></a>
-                                   <a href="/employee_profile_delete/{{i.pk}}/" class="btn btn-danger"
+                              <td><a href="{% url 'admin_emp_view_detail' i.pk %}" class="btn btn-primary"><i class="fa-solid fa-circle-user"></i></a>
+                                   <a href="{% url 'employee_profile_delete' i.pk %}" class="btn btn-danger"
                                         onclick="return confirm('Are you sure?')"><i
                                              class="fa-solid fa-user-xmark"></i></a>
                               </td>

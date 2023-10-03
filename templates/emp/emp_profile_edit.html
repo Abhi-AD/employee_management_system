@@ -28,7 +28,7 @@
 
 
           <div class="container-fluid">
-               <form action="" method="post" name="signup">
+               <form action="{% url 'emp_profile_edit' %}" method="post" name="signup" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-row">
                          <div class="col-sm-6">
@@ -96,12 +96,7 @@
                                    </select>
                               </div>
                          </div>
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="formFile" class="form-label">Image Upload</label>
-                                   <input class="form-control" type="file" id="formFile"name="feature_image">
-                              </div>
-                         </div>
+                         
 
                     </div>
                     <input type="submit" value="Submit" class="m-4 px-3 btn btn-success">

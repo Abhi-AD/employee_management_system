@@ -16,7 +16,8 @@
           <h2 class="p-2 text-secondary">Create Your Account</h2>
 
           <div class="container-fluid">
-               <form action="" method="post" name="signup" onsubmit="return checkpassword()">
+               <form action="" method="post" name="signup" onsubmit="return checkpassword()"
+                    enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-row">
                          <div class="col-sm-6">
@@ -75,7 +76,26 @@
 </div>
 
 
-     
+{% if error == "no" %}
+<script>
+     alert("New emp add");
+     window.location = "{% url 'all_employee'%}";  // Redirecting to other page (add)
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+     alert('Please Enter Correct Details');  
+</script>
+
+{% endif %}
+
+
+
+
+
+
+
 
 
 
