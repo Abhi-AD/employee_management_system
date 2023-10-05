@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponse
 from django.http import JsonResponse
-from web_app.forms import CustomerForm,ResumeForm,NewsletterForm
+from web_app.forms import NewsletterForm,Job_apply_Form
 from django.views import View
 from django.contrib.auth.models import *
 from web_app.model import *
@@ -132,7 +132,7 @@ class FreelancerView(ListView):
 
 def jobapply(request):
     if request.method == 'POST':
-        form = ResumeForm(request.POST, request.FILES)
+        form = Job_apply_Form(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return JsonResponse({'message': 'Your Job Application is successfully submitted'})
@@ -142,7 +142,7 @@ def jobapply(request):
             return JsonResponse({'message': 'Form validation failed', 'errors': errors}, status=400)
 
     else:
-        form = ResumeForm()
+        form = Job_apply_Form()
 
     context = {
         'form': form,
@@ -150,22 +150,25 @@ def jobapply(request):
 
     return render(request, 'apply_form.html', context)
 
-def customer(request):
-    if request.method == 'POST':
-        form = CustomerForm(request.POST)
-        if form.is_valid():
-            Name = form.cleaned_data['name']
-            Address = form.cleaned_data['address']
-            City = form.cleaned_data['city']
-            Pincode = form.cleaned_data['pincode']
-            Email = form.cleaned_data['email']
-            Phone = form.cleaned_data['phone']
-            print('Name:', Name)
-            print('Full Address:', Address, City, Pincode)	
-            print('Email:', Email)
-            print('Phone:', Phone)
-    form = CustomerForm()
-    return render(request, "forms.html", {'form':form})
+
+
+
+# def customer(request):
+#     if request.method == 'POST':
+#         form = CustomerForm(request.POST)
+#         if form.is_valid():
+#             Name = form.cleaned_data['name']
+#             Address = form.cleaned_data['address']
+#             City = form.cleaned_data['city']
+#             Pincode = form.cleaned_data['pincode']
+#             Email = form.cleaned_data['email']
+#             Phone = form.cleaned_data['phone']
+#             print('Name:', Name)
+#             print('Full Address:', Address, City, Pincode)	
+#             print('Email:', Email)
+#             print('Phone:', Phone)
+#     form = CustomerForm()
+#     return render(request, "forms.html", {'form':form})
 
 
 

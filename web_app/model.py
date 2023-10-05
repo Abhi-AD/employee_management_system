@@ -2,7 +2,6 @@ from django.db import models
 
 
 
-
 class TimesStampModel(models.Model):
      created_at = models.DateTimeField(auto_now_add=True)
      updated_at = models.DateTimeField(auto_now=True)
@@ -43,22 +42,23 @@ class JobPosting(models.Model):
         return self.title
    
 
-
-class Resume(models.Model):
-    full_name = models.CharField(max_length=150)
-    gender = models.CharField(max_length=10)
-    date_of_birth = models.DateField()
-    email = models.EmailField()
-    current_address = models.CharField(max_length=300)
-    city = models.CharField(max_length=20)
-    state = models.CharField(max_length=20)
-    resume = models.FileField(upload_to='Job_apply/resumes/%Y/%m/%d', blank=False)
-    letter = models.FileField(upload_to='Job_apply/letter/%Y/%m/%d', blank=False)
-    quailfation = models.FileField(upload_to='Job_apply/quailfation/%Y/%m/%d', blank=False)
-    apply_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.full_name
+class Job_apply_Application(models.Model):
+     GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other'),
+        )
+     category_id = models.ForeignKey(JobCategory, on_delete=models.CASCADE)
+     full_name = models.CharField(max_length=150)
+     gender = models.CharField(max_length=1,choices=GENDER_CHOICES)
+     date_of_birth = models.DateField()
+     email = models.EmailField()
+     state = models.CharField(max_length=20)
+     resume = models.FileField(upload_to='Job_apply/resumes/%Y/%m/%d', blank=False)
+     letter = models.FileField(upload_to='Job_apply/letter/%Y/%m/%d', blank=False)
+     quailfation = models.FileField(upload_to='Job_apply/quailfation/%Y/%m/%d', blank=False)
+     apply_date = models.DateTimeField(auto_now_add=True)
+     location = models.ManyToManyField(JobLocation)
 
 
 

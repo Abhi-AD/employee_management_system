@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from employee_app.models import *
-from web_app.model import JobPosting, JobLocation, JobCategory, Resume, Newsletter
+from web_app.model import JobPosting, JobLocation, JobCategory,  Newsletter,Job_apply_Application
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -36,7 +36,7 @@ class JobPostingSerializer(serializers.ModelSerializer):
 
 class ResumeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Resume
+        model = Job_apply_Application
         fields = "__all__"
 
 

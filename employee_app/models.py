@@ -4,6 +4,11 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class EmployeeDetail(models.Model):
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other'),
+    )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     feature_image = models.ImageField(upload_to="EMP_images/%Y/%m/%d", blank=False)
@@ -11,7 +16,7 @@ class EmployeeDetail(models.Model):
     empdept = models.CharField(max_length=50, null=True)
     designation = models.CharField(max_length=100, null=True)
     contact = models.IntegerField(null=True)
-    gender = models.CharField(max_length=50, null=True)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     join_date = models.DateField(null=True)
 
     def __str__(self):

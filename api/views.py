@@ -79,7 +79,7 @@ class ResumeViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows resumes to be viewed or edited.
     """
-    queryset = Resume.objects.all()
+    queryset = Job_apply_Application.objects.all()
     serializer_class = ResumeSerializer
     permission_classes = [permissions.IsAuthenticated]
 
