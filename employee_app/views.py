@@ -24,24 +24,28 @@ class RegistrationView(View):
 
     def post(self, request):
         error = ""
-        firstname = request.POST.get("firstname")
-        lastname = request.POST.get("lastname")
-        empcode = request.POST.get("empcode")
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-        feature_image = request.FILES.get("feature_image")  
+        if request.method == "POST":
+            firstname = request.POST.get("firstname")
+            lastname = request.POST.get("lastname")
+            empcode = request.POST.get("empcode")
+            email = request.POST.get("email")
+            password = request.POST.get("password")
+            feature_image = request.FILES.get("feature_image")  
+            
 
-        try:
-            user = User.objects.create_user(
-                username=email,
-                password=password,
-                first_name=firstname,
-                last_name=lastname,
-            )
-            EmployeeDetail.objects.create(user=user, empcode=empcode, feature_image=feature_image)
-            error = "no"
-        except Exception as e:
-            error = "yes"
+            try:
+                user = User.objects.create_user(
+                    first_name=firstname,
+                    last_name=lastname,
+                    username=email,
+                    password=password,
+                )
+                EmployeeDetail.objects.create(user=user, empcode=empcode, feature_image=feature_image)
+                EmployeeExperience.objects.create(user=user)
+                EmployeeEducation.objects.create(user=user)
+                error = "no"
+            except:
+                error = "yes"
 
         return render(request, self.template_name, {"error": error})
 
