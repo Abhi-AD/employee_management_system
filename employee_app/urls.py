@@ -8,7 +8,7 @@ urlpatterns = [
     path("registration/", RegistrationView.as_view(), name="registration"),
     path("employee-add/", NewEmployeeRegistrationView.as_view(), name="employee-add"),
     path("job-add/", add_job_posting, name="job-add"),
-    
+    # path('signup/', CustomUserCreateView.as_view(), name='signup'),    
     
     
     # login/logout view

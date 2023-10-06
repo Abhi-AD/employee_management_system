@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'header.html' %}
+<script>
+     function checkpassword() {
+          if (document.signup.password.value != document.signup.conformpassword.value) {
+               alert('Password And Conform password is doesnot match');
+               document.signup.conformpassword.focus();
+               return false;
+          }
+          return true;
+     }
+</script>
+
+<div class="card shadow m-5">
+     <div class="card-body">
+          <h2 class="p-2 text-secondary">Create Your Account</h2>
+
+          <div class="container-fluid">
+               <form action="" method="post" name="signup" onsubmit="return checkpassword()"
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                         <div class="col-sm-6">
+                              <div class="form-group">
+                                   <label for="">First Name</label>
+                                   <input class="form-control valid" name="firs_tname" id="firs_tname" type="text"
+                                        onfocus="this.placeholder = ''"
+                                        onblur="this.placeholder = 'Enter your first name'"
+                                        placeholder="Enter your first name" value="{{ form.first_name.value }}"
+                                        pattern="[A-Za-z]+" required />
+                                   {{form.user.first_name.errors}}
+                              </div>
+                         </div>
+                         <div class="col-sm-6">
+                              <div class="form-group">
+                                   <label for="">Last Name</label>
+                                   <input class="form-control valid" name="lastname" id="lastname" type="text"
+                                        onfocus="this.placeholder = ''"
+                                        onblur="this.placeholder = 'Enter your lastname'"
+                                        placeholder="Enter your last name" value="{{ form.last_name.value }}"
+                                        pattern="[A-Za-z]+" required />
+                                   {{form.user.last_name.errors}}
+                              </div>
+                         </div>
+                         <div class=" col-sm-6">
+                              <div class="form-group">
+                                   <label for="">Employee Code</label>
+                                   <input class="form-control valid" name="empcode" id="empcode" type="text"
+                                        onfocus="this.placeholder = ''"
+                                        onblur="this.placeholder = 'Enter a your Employee Code'"
+                                        placeholder="Enter a your Employee Code" pattern="[0-9]+" required />
+                                   {{form.empcode.errors}}
+                              </div>
+                         </div>
+                         <div class="col-sm-6">
+                              <div class="form-group">
+                                   <label for="">Email ID</label>
+                                   <input class="form-control" name="email" id="email" type="email"
+                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter a your email'"
+                                        placeholder="Enter a your email"  required />
+                                   {{form.email.errors}}
+                              </div>
+                         </div>
+                         <div class="col-sm-6">
+                              <div class="form-group">
+                                   <label for="">Password</label>
+                                   <input class="form-control" name="password" id="password" type="password"
+                                        onfocus="this.placeholder = ''"
+                                        onblur="this.placeholder = 'Enter a your password'"
+                                        placeholder="Enter a your password" required />
+                                   {{form.password.errors}}
+                              </div>
+                         </div>
+                         <div class="col-sm-6">
+                              <div class="form-group">
+                                   <label for="">Conform Password</label>
+                                   <input class="form-control" name="conformpassword" id="conformpassword"
+                                        type="password" onfocus="this.placeholder = ''"
+                                        onblur="this.placeholder = 'Enter a your password Again'"
+                                        placeholder="Enter a your password Again" required />
+                                   {{form.conformpassword.errors}}
+                              </div>
+                         </div>
+                         <div class="col-sm-6">
+                              <div class="form-group">
+                                   <label for="">Feature Image</label>
+                                   <input class="form-control" name="feature_image" id="img" type="file">
+                                   {{form.feature_image.errors}}
+                              </div>
+                         </div>
+                    </div>
+                    <!-- <input type="submit" value="Submit" class="m-4 px-3 btn btn-success"> -->
+               </form>
+
+
+
+
+
+
+
+
+
+
+
+               <input type="submit" value="Submit" class="m-4 px-3 btn btn-success">
+               </form>
+          </div>
+     </div>
+</div>
+
+{% if error == "no" %}
+<script>
+     alert("Sign of sucessfully");
+     window.location = "{% url 'emp_login'%}";  // Redirecting to other page (add)
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+     alert('Please Enter Correct Details');  
+</script>
+
+{% endif %}
+
+
+
+
+
+
+{% endblock content %}
