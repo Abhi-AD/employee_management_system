@@ -6,6 +6,17 @@
                Education</a>
 
           <h2 class="p-2 text-secondary">Update Education</h2>
+          {% if error == "no" %}
+          <div class="alert alert-success" role="alert">
+               Education update Successfully
+          </div>
+          {% endif %}
+
+          {% if error == "yes" %}
+          <div class="alert alert-danger" role="alert">
+               Please Enter Correct Details
+          </div>
+          {% endif %}
 
           <div class="container-fluid">
                <form action="" method="post">
@@ -72,19 +83,6 @@
 </div>
 
 
-{% if error == "no" %}
-<script>
-     alert("Education update Successfully");
-     window.location = "{% url 'emp_edit_education'%}";  // Redirecting to other page (add)
-</script>
-{% endif %}
-
-{% if error == "yes" %}
-<script>
-     alert('Please Enter Details');
-</script>
-
-{% endif %}
 
 
 

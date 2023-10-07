@@ -5,16 +5,16 @@
           <div class="row">
                <h2 class="p-2 text-secondary">Profile Details</h2>
                <div class="col-md-2">
-                    <img src="{{employee.feature_image.url }}" alt="Images" height="100" width="100"
+                    <img src="{{form.instance.feature_image.url }}" alt="Images" height="100" width="100"
                          class="img-thumbnail  my-5 d-flex">
                </div>
                <div class="col-md-10">
-                    <h6 class="col-sm-6 form-group form-row">Name:{{employee.user.first_name}}
-                         {{employee.user.last_name}}</h6>
-                    <h6 class="col-sm-6 form-group form-row">Designation:{{employee.designation}}</h6>
-                    <h6 class="col-sm-6 form-group form-row">Department:{{employee.empdept}}</h6>
-                    <h6 class="col-sm-6 form-group form-row">Joining:{{employee.join_date}}</h6>
-                    <h6 class="col-sm-6 form-group form-row">Gender:{{employee.gender}}</h6>
+                    <h6 class="col-sm-6 form-group form-row">Name:{{form.instance.user.first_name}}
+                         {{form.instance.user.last_name}}</h6>
+                    <h6 class="col-sm-6 form-group form-row">Designation:{{form.instance.designation}}</h6>
+                    <h6 class="col-sm-6 form-group form-row">Department:{{form.instance.empdept}}</h6>
+                    <h6 class="col-sm-6 form-group form-row">Joining:{{form.instance.join_date}}</h6>
+                    <h6 class="col-sm-6 form-group form-row">Gender:{{form.instance.gender}}</h6>
 
                     <a href="{% url 'emp_profile_edit' %}" class="btn btn-primary ">EDIT</a>
                </div>

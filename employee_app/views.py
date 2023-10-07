@@ -16,96 +16,6 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 # add new  view
-# def signup(request):
-#     if request.method == "POST":
-#         fm = SignUpForm(request.POST)
-#         if fm.is_valid():
-#             messages.success(request, 'Account Create Success')
-#             fm.save
-#     else:
-#         fm = SignUpForm
-#     return render(request, "sign.html", {"form": fm})
-
-# def create_user_or_employee(request):
-#     if request.method == 'POST':
-#         # Determine which form to use based on the submitted data
-#         if 'username' in request.POST:
-#             form = CreateModelForm(request.POST)
-#             if form.is_valid():
-#                 form.save()
-#                 return redirect('success_url_for_user_creation')  # Replace with your desired success URL
-#         elif 'employee_field' in request.POST:
-#             form = EmployeeDetailModelForm(request.POST)
-#             if form.is_valid():
-#                 form.save()
-#                 return redirect('success_url_for_employee_creation')  # Replace with your desired success URL
-#     else:
-#         # Display the appropriate form based on user input
-#         if 'create_user' in request.GET:
-#             form = CreateModelForm()
-#         elif 'create_employee' in request.GET:
-#             form = EmployeeDetailModelForm()
-#         else:
-#             form = None  # You can handle other cases as needed
-
-#     return render(request, 'your_template.html', {'form': form})
-
-
-
-# def create_employee_detail(request):
-#     if request.method == 'POST':
-#         form = EmployeeDetailForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('success')  # Redirect to a success page
-#     else:
-#         form = EmployeeDetailForm()
-    
-#     return render(request, 'your_template.html', {'form': form})
-
-
-
-# class RegistrationView(View):
-#     template_name = "sign.html"
-
-#     def get(self, request):
-#         form = RegistrationForm()
-#         return render(request, self.template_name, {'form': form})
-
-#     def post(self, request):
-#         form = RegistrationForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             firstname = form.cleaned_data['firstname']
-#             lastname = form.cleaned_data['lastname']
-#             empcode = form.cleaned_data['empcode']
-#             email = form.cleaned_data['email']
-#             password = form.cleaned_data['password']
-#             feature_image = form.cleaned_data['feature_image']
-
-#             try:
-#                 user = User.objects.create_user(
-#                     first_name=firstname,
-#                     last_name=lastname,
-#                     username=email,
-#                     password=password,
-#                 )
-#                 EmployeeDetail.objects.create(user=user, empcode=empcode, feature_image=feature_image)
-#                 EmployeeExperience.objects.create(user=user)
-#                 EmployeeEducation.objects.create(user=user)
-#                 error = "no"
-#             except:
-#                 error = "yes"
-#         else:
-#             error = "yes"
-
-#         return render(request, self.template_name, {"error": error, 'form': form})
-
-
-
-
-
-
-
 
 class RegistrationView(View):
     template_name = "registration.html"
@@ -174,6 +84,9 @@ class NewEmployeeRegistrationView(View):
                 error = "yes"
 
         return render(request, self.template_name, {"error": error})
+
+
+
 
 def add_job_posting(request):
     if request.method == 'POST':
@@ -258,7 +171,7 @@ def emp_profile(request):
     else:
         form = EmployeeProfileForm(instance=employee)
 
-    return render(request, "emp/emp_profile.html", locals())
+    return render(request, "emp/emp_profile.html", {'form': form, 'error': error})
 
 
 def emp_experiences(request):
@@ -281,7 +194,7 @@ def emp_experiences(request):
     else:
         form = EmployeeExperienceForm(instance=experience)
 
-    return render(request, "emp/emp_details/emp_experience.html", locals())
+    return render(request, "emp/emp_details/emp_experience.html", {'form': form})
 
 
 
@@ -304,7 +217,7 @@ def emp_education(request):
     else:
         form = EmployeeEducationForm(instance=education)
 
-    return render(request, "emp/emp_details/emp_education.html", locals())
+    return render(request, "emp/emp_details/emp_education.html", {'form': form})
 
 
 
@@ -348,43 +261,62 @@ def admin_job_view_detail(request, pk):
 
 # edit view
 
+# def emp_profile_edit(request):
+#     if not request.user.is_authenticated:
+#         return redirect("emp_login")
+#     error = ""
+#     user = request.user
+#     employee = EmployeeDetail.objects.get(user=user)
+#     if request.method == "POST":
+#         firstname = request.POST["firstname"]
+#         lastname = request.POST["lastname"]
+#         empcode = request.POST["empcode"]
+#         department = request.POST["department"]
+#         designation = request.POST["designation"]
+#         gender = request.POST["gender"]
+#         contact = request.POST["contact"]
+#         jdate = request.POST["jdate"]
+
+#         employee.user.first_name = firstname
+#         employee.user.last_name = lastname
+#         employee.empcode = empcode
+#         employee.contact = contact
+#         employee.designation = designation
+#         employee.empdept = department
+#         employee.gender = gender
+ 
+#         if jdate:
+#             employee.join_date = jdate
+
+#         try:
+#             employee.save()
+#             employee.user.save()
+#             error = "no"
+#         except:
+#             error = "yes"
+
+#     return render(request, "emp/emp_profile_edit.html", locals())
+
 
 def emp_profile_edit(request):
     if not request.user.is_authenticated:
         return redirect("emp_login")
-    error = ""
+    
     user = request.user
     employee = EmployeeDetail.objects.get(user=user)
+    error = ""
+
     if request.method == "POST":
-        firstname = request.POST["firstname"]
-        lastname = request.POST["lastname"]
-        empcode = request.POST["empcode"]
-        department = request.POST["department"]
-        designation = request.POST["designation"]
-        gender = request.POST["gender"]
-        contact = request.POST["contact"]
-        jdate = request.POST["jdate"]
-
-        employee.user.first_name = firstname
-        employee.user.last_name = lastname
-        employee.empcode = empcode
-        employee.contact = contact
-        employee.designation = designation
-        employee.empdept = department
-        employee.gender = gender
- 
-        if jdate:
-            employee.join_date = jdate
-
-        try:
-            employee.save()
-            employee.user.save()
+        form = EmployeeProfileEditForm(request.POST, instance=employee)
+        if form.is_valid():
+            form.save()
             error = "no"
-        except:
+        else:
             error = "yes"
+    else:
+        form = EmployeeProfileEditForm(instance=employee)
 
-    return render(request, "emp/emp_profile_edit.html", locals())
-
+    return render(request, "emp/1.html", {"form": form, "error": error})
 
 
 def emp_edit_experiences(request):
@@ -582,69 +514,6 @@ def job_post_delete(request, pk):
     except Exception as e:
         # Handle exceptions or errors
         return HttpResponse("An error occurred", status=500)
-
-
-
-
-
-# def edit_admin_education(request):
-#     if not request.user.is_authenticated:
-#         return redirect("emp_login")
-#     error = ""
-#     user = request.user
-#     try:
-#         education = EmployeeEducation.objects.get(user=user)
-#     except ObjectDoesNotExist:
-#         education = EmployeeEducation(user=user)
-
-#     if request.method == "POST":
-#         coursepg = request.POST["coursepg"]
-#         schoolpg = request.POST["schoolpg"]
-#         yearofpassingpg = request.POST["yearofpassingpg"]
-#         percentagepg = request.POST["percentagepg"]
-
-#         coursegra = request.POST["coursegra"]
-#         schoolgra = request.POST["schoolgra"]
-#         yearofpassinggra = request.POST["yearofpassinggra"]
-#         percentagegra = request.POST["percentagegra"]
-
-#         coursessc = request.POST["coursessc"]
-#         schoolssc = request.POST["schoolssc"]
-#         yearofpassingssc = request.POST["yearofpassingssc"]
-#         percentagessc = request.POST["percentagessc"]
-
-#         coursehsc = request.POST["coursehsc"]
-#         schoolhsc = request.POST["schoolhsc"]
-#         yearofpassinghsc = request.POST["yearofpassinghsc"]
-#         percentagehsc = request.POST["percentagehsc"]
-
-#         education.coursepg = coursepg
-#         education.schoolpg = schoolpg
-#         education.yearofpassingpg = yearofpassingpg
-#         education.percentagepg = percentagepg
-
-#         education.coursegra = coursegra
-#         education.schoolgra = schoolgra
-#         education.yearofpassinggra = yearofpassinggra
-#         education.percentagegra = percentagegra
-
-#         education.coursessc = coursessc
-#         education.schoolssc = schoolssc
-#         education.yearofpassingssc = yearofpassingssc
-#         education.percentagessc = percentagessc
-
-#         education.coursehsc = coursehsc
-#         education.schoolhsc = schoolhsc
-#         education.yearofpassinghsc = yearofpassinghsc
-#         education.percentagehsc = percentagehsc
-
-#         try:
-#             education.save()
-#             error = "no"
-#         except:
-#             error = "yes"
-#     return render(request, "admin/admin_education_update.html", locals())
-
 
 
 

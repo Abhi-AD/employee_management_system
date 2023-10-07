@@ -30,6 +30,8 @@ class HomeView(ListView):
         ).order_by("-posted_at")[:2]
         context["freelancer_posts"] = EmployeeDetail.objects.filter(
         ).order_by("-join_date")[:3]
+        context["trending_posts"] = JobPosting.objects.filter(posted_at__isnull = False, status = "active").order_by("-posted_at")[:4]
+        context["trending_post"] = JobPosting.objects.filter(posted_at__isnull = False, status = "active").order_by("-posted_at")[:1]
         
         context["locations"] = JobLocation.objects.all()       
         context["department"] = JobPosting.objects.all()       

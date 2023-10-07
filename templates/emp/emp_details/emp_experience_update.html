@@ -6,6 +6,17 @@
                Experiences</a>
 
           <h2 class="p-2 text-secondary">Update Experiences</h2>
+          {% if error == "no" %}
+          <div class="alert alert-success" role="alert">
+               Experiences update Successfully
+          </div>
+          {% endif %}
+
+          {% if error == "yes" %}
+          <div class="alert alert-danger" role="alert">
+               Please Enter Correct Details
+          </div>
+          {% endif %}
 
           <div class="container-fluid">
                <form action="" method="post">
@@ -61,22 +72,6 @@
           </div>
      </div>
 </div>
-
-
-{% if error == "no" %}
-<script>
-     alert("Experience update Successfully");
-     window.location = "{% url 'emp_edit_experiences'%}";  // Redirecting to other page (add)
-</script>
-{% endif %}
-
-{% if error == "yes" %}
-<script>
-     alert('Please Enter Details');
-</script>
-
-{% endif %}
-
 
 
 

@@ -1,58 +1,65 @@
 {% load static %}
- <!-- slider section -->
- <section class="slider_section ">
-     <div class="container ">
-       <div class="row">
-         <div class="col-lg-7 col-md-8 mx-auto">
-           <div class="detail-box">
-             <h1>
-               Build Your <br>
-               POWERFUL CAREER
-             </h1>
-             <p>
-               when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-               distribution of letters, as opposed to
-             </p>
-           </div>
-         </div>
-       </div>
-       <div class="find_container ">
-         <div class="container">
-           <div class="row">
-             <div class="col">
-               <form action="{% url 'job-post-search' %}" method="get">
-                 <div class="form-row ">
-                   <div class="form-group col-lg-3">
-                    {% csrf_token%}
-                     <input type="text" class="form-control" id="inputPatientName" placeholder="Search Job" name="query">
-                   </div>
-                   <div class="form-group col-lg-3">
-                     <select name="" class="form-control wide" id="inputDoctorName">
-                      <option value="Normal distribution ">All locations </option>
-                       {% for locations in locations %}
-                       <option value="Normal distribution ">{{locations.name}}</option>                      
-                       {% endfor %}
-                        
-                     </select>
-                   </div>
-                   <div class="form-group col-lg-3">
-                     <select name="" class="form-control wide" id="inputDepartmentName">
-                      <option value="Normal distribution ">All department</option>            
-                      {% for department in department %}              
-                      <option value="Normal distribution ">{{department.title}}</option>
-                      {% endfor %}
-                     </select>
-                   </div>
-                   <div class="form-group col-lg-3">
-                     <div class="btn-box">
-                       <button type="submit" class="btn ">Submit Now</button>
-                     </div>
-                   </div>
-                 </div>
-               </form>
-             </div>
-           </div>
-           <!-- <ul class="job_check_list">
+<!-- slider section -->
+<section class="slider_section ">
+  <div class="container ">
+    <div class="row">
+      <div class="col-lg-7 col-md-8 mx-auto">
+        <div class="detail-box">
+          <h1>
+            Build Your <br>
+            POWERFUL CAREER
+          </h1>
+          <p>It seems like you're posting job openings for various positions:
+            {% for trending_post in trending_posts %}
+            {{ trending_post.title}},
+            {% endfor %}<br> 
+            Posting a job description:
+            {% for trending_posts in trending_post%}
+            {{trending_posts.description}}
+            {% endfor %}<br>
+             Here's a template you can use to create job postings for each
+            position.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="find_container ">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <form action="{% url 'job-post-search' %}" method="get">
+              <div class="form-row ">
+                <div class="form-group col-lg-3">
+                  {% csrf_token%}
+                  <input type="text" class="form-control" id="inputPatientName" placeholder="Search Job" name="query">
+                </div>
+                <div class="form-group col-lg-3">
+                  <select name="" class="form-control wide" id="inputDoctorName">
+                    <option value="Normal distribution ">All locations </option>
+                    {% for locations in locations %}
+                    <option value="Normal distribution ">{{locations.name}}</option>
+                    {% endfor %}
+
+                  </select>
+                </div>
+                <div class="form-group col-lg-3">
+                  <select name="" class="form-control wide" id="inputDepartmentName">
+                    <option value="Normal distribution ">All department</option>
+                    {% for department in department %}
+                    <option value="Normal distribution ">{{department.title}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="form-group col-lg-3">
+                  <div class="btn-box">
+                    <button type="submit" class="btn ">Submit Now</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- <ul class="job_check_list">
              <li class=" ">
                <input id="checkbox_qu_01" type="checkbox" class="styled-checkbox">
                <label for="checkbox_qu_01">
@@ -72,8 +79,8 @@
                </label>
              </li>
            </ul> -->
-         </div>
-       </div>
-     </div>
-   </section>
-   <!-- end slider section -->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end slider section -->

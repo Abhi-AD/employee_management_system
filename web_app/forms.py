@@ -39,24 +39,7 @@ class Job_apply_Form(forms.ModelForm):
          }
         
         
-from employee_app.models import *
 
-class EmployeeProfileForm(forms.ModelForm):
-    class Meta:
-        model = EmployeeDetail
-        fields = '__all__'
-  
-
-class EmployeeExperienceForm(forms.ModelForm):
-    class Meta:
-        model = EmployeeExperience
-        fields = '__all__'
-        
-class EmployeeEducationForm(forms.ModelForm):
-    class Meta:
-        model = EmployeeEducation
-        fields = '__all__'
-        
 
   
   

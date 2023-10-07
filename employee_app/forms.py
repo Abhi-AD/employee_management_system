@@ -21,7 +21,24 @@
 from django import forms
 from employee_app.models import *
 
-class RegistrationForm(forms.Form):
+class EmployeeProfileForm(forms.ModelForm):
     class Meta:
         model = EmployeeDetail
-        fields = '__all__  '
+        fields = '__all__'
+  
+
+class EmployeeExperienceForm(forms.ModelForm):
+    class Meta:
+        model = EmployeeExperience
+        fields = '__all__'
+        
+class EmployeeEducationForm(forms.ModelForm):
+    class Meta:
+        model = EmployeeEducation
+        fields = '__all__'
+        
+        
+class EmployeeProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = EmployeeDetail
+        fields = ['empcode', 'empdept', 'designation', 'contact', 'gender', 'join_date']
