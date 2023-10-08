@@ -21,11 +21,7 @@
 from django import forms
 from employee_app.models import *
 
-class EmployeeProfileForm(forms.ModelForm):
-    class Meta:
-        model = EmployeeDetail
-        fields = '__all__'
-  
+
 
 class EmployeeExperienceForm(forms.ModelForm):
     class Meta:
@@ -42,3 +38,15 @@ class EmployeeProfileEditForm(forms.ModelForm):
     class Meta:
         model = EmployeeDetail
         fields = ['empcode', 'empdept', 'designation', 'contact', 'gender', 'join_date']
+        
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'password']
+    
+    
+class EmployeeProfileForm(forms.ModelForm):
+    class Meta:
+        model = EmployeeDetail
+        fields = '__all__'
+  

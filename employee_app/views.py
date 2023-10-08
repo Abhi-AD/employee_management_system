@@ -11,46 +11,73 @@ from employee_app.forms import *
 from django.core.exceptions import ObjectDoesNotExist
 
 
-
 # Create your views here.
 
 
 # add new  view
 
+
+# class RegistrationView(View):
+#     template_name = "registration.html"
+
+#     def get(self, request):
+#         return render(request, self.template_name)
+
+#     def post(self, request):
+#         error = ""
+#         if request.method == "POST":
+            
+#             firstname = request.POST.get("firstname")
+#             lastname = request.POST.get("lastname")
+#             empcode = request.POST.get("empcode")
+#             email = request.POST.get("email")
+#             password = request.POST.get("password")
+#             feature_image = request.FILES.get("feature_image")
+
+#             try:                    
+#                 user = User.objects.create_user(
+#                     first_name=firstname,
+#                     last_name=lastname,
+#                     username=email,
+#                     password=password,
+#                 )
+                
+                
+#                 EmployeeDetail.objects.create(
+#                     user=user, empcode=empcode, feature_image=feature_image
+#                 )
+#                 EmployeeExperience.objects.create(user=user)
+#                 EmployeeEducation.objects.create(user=user)
+#                 error = "no"
+#             except:
+#                 error = "yes"
+
+#         return render(request, self.template_name, {"error": error})
+       
+        
 class RegistrationView(View):
     template_name = "registration.html"
-
+    
     def get(self, request):
         return render(request, self.template_name)
-
+    
     def post(self, request):
-        error = ""
-        if request.method == "POST":
-            firstname = request.POST.get("firstname")
-            lastname = request.POST.get("lastname")
-            empcode = request.POST.get("empcode")
-            email = request.POST.get("email")
-            password = request.POST.get("password")
-            feature_image = request.FILES.get("feature_image")  
+        user_form = UserForm(request.POST)
+        
+        if user_form.is_valid():
+            user = user_form.save()
+            employee_form = EmployeeProfileForm(request.POST, user=user)
+
+            if employee_form.is_valid():
+                employee = employee_form.save()
             
-
-            try:
-                user = User.objects.create_user(
-                    first_name=firstname,
-                    last_name=lastname,
-                    username=email,
-                    password=password,
-                )
-                EmployeeDetail.objects.create(user=user, empcode=empcode, feature_image=feature_image)
-                EmployeeExperience.objects.create(user=user)
-                EmployeeEducation.objects.create(user=user)
-                error = "no"
-            except:
-                error = "yes"
-
-        return render(request, self.template_name, {"error": error})
-
-
+            # Create related objects only if both forms are valid
+            EmployeeDetail.objects.create(user=user)
+            EmployeeEducation.objects.create(user=user)
+            EmployeeExperience.objects.create(user=user)
+            
+        return render(request, self.template_name, {"user_form": user_form, "employee_form": employee_form})
+       
 
 class NewEmployeeRegistrationView(View):
     template_name = "admin/registration.html"
@@ -66,8 +93,7 @@ class NewEmployeeRegistrationView(View):
             empcode = request.POST.get("empcode")
             email = request.POST.get("email")
             password = request.POST.get("password")
-            feature_image = request.FILES.get("feature_image")  
-            
+            feature_image = request.FILES.get("feature_image")
 
             try:
                 user = User.objects.create_user(
@@ -76,7 +102,9 @@ class NewEmployeeRegistrationView(View):
                     username=email,
                     password=password,
                 )
-                EmployeeDetail.objects.create(user=user, empcode=empcode, feature_image=feature_image)
+                EmployeeDetail.objects.create(
+                    user=user, empcode=empcode, feature_image=feature_image
+                )
                 EmployeeExperience.objects.create(user=user)
                 EmployeeEducation.objects.create(user=user)
                 error = "no"
@@ -86,23 +114,22 @@ class NewEmployeeRegistrationView(View):
         return render(request, self.template_name, {"error": error})
 
 
-
-
 def add_job_posting(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = JobPostingForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('all_job')  # Redirect to a job list page after successful submission
+            return redirect(
+                "all_job"
+            )  # Redirect to a job list page after successful submission
     else:
         form = JobPostingForm()
 
-    return render(request, 'admin/job_add.html', {'form': form})
-
-
+    return render(request, "admin/job_add.html", {"form": form})
 
 
 # login/logout view
+
 
 def emp_login(request):
     error = ""
@@ -118,9 +145,11 @@ def emp_login(request):
 
     return render(request, "emp/emp_login.html", locals())
 
+
 def emp_logout(request):
     logout(request)
     return redirect("index")
+
 
 def admin_login(request):
     error = ""
@@ -140,10 +169,8 @@ def admin_login(request):
     return render(request, "admin/admin_login.html", locals())
 
 
-
-
-
 # show view emp
+
 
 def emp_home(request):
     if not request.user.is_authenticated:
@@ -151,11 +178,10 @@ def emp_home(request):
     return render(request, "emp/emp_home.html")
 
 
-
 def emp_profile(request):
     if not request.user.is_authenticated:
         return redirect("emp_login")
-    
+
     user = request.user
     employee = EmployeeDetail.objects.get(user=user)
     error = ""
@@ -171,7 +197,7 @@ def emp_profile(request):
     else:
         form = EmployeeProfileForm(instance=employee)
 
-    return render(request, "emp/emp_profile.html", {'form': form, 'error': error})
+    return render(request, "emp/emp_profile.html", {"form": form, "error": error})
 
 
 def emp_experiences(request):
@@ -185,7 +211,7 @@ def emp_experiences(request):
     except EmployeeExperience.DoesNotExist:
         experience = None
 
-    if request.method == 'POST':
+    if request.method == "POST":
         form = EmployeeExperienceForm(request.POST, instance=experience)
         if form.is_valid():
             experience = form.save(commit=False)
@@ -194,21 +220,20 @@ def emp_experiences(request):
     else:
         form = EmployeeExperienceForm(instance=experience)
 
-    return render(request, "emp/emp_details/emp_experience.html", {'form': form})
-
+    return render(request, "emp/emp_details/emp_experience.html", {"form": form})
 
 
 def emp_education(request):
     if not request.user.is_authenticated:
         return redirect("emp_login")
-    
+
     user = request.user
     try:
         education = EmployeeEducation.objects.get(user=user)
     except EmployeeEducation.DoesNotExist:
         education = None
 
-    if request.method == 'POST':
+    if request.method == "POST":
         form = EmployeeEducationForm(request.POST, instance=education)
         if form.is_valid():
             education = form.save(commit=False)
@@ -217,15 +242,11 @@ def emp_education(request):
     else:
         form = EmployeeEducationForm(instance=education)
 
-    return render(request, "emp/emp_details/emp_education.html", {'form': form})
-
-
-
-
-
+    return render(request, "emp/emp_details/emp_education.html", {"form": form})
 
 
 # show view admin
+
 
 def admin_home(request):
     # user = request.user
@@ -233,11 +254,13 @@ def admin_home(request):
         return redirect("admin_login")
     return render(request, "admin/admin_home.html")
 
+
 def all_employee(request):
     if not request.user.is_superuser:
         return redirect("admin_login")
     employee = EmployeeDetail.objects.all()
     return render(request, "admin/all_employee.html", locals())
+
 
 def admin_emp_view_detail(request, pk):
     if not request.user.is_superuser:
@@ -245,18 +268,19 @@ def admin_emp_view_detail(request, pk):
     employee = EmployeeDetail.objects.get(id=pk)
     return render(request, "admin/emp_profile_view.html", {"employee": employee})
 
+
 def all_job(request):
     if not request.user.is_superuser:
         return redirect("admin_login")
     employee = JobPosting.objects.all()
     return render(request, "admin/all_job.html", locals())
 
+
 def admin_job_view_detail(request, pk):
     if not request.user.is_superuser:
         return redirect("admin_login")
     employee = JobPosting.objects.get(id=pk)
     return render(request, "admin/job_profile_view.html", {"employee": employee})
-
 
 
 # edit view
@@ -284,7 +308,7 @@ def admin_job_view_detail(request, pk):
 #         employee.designation = designation
 #         employee.empdept = department
 #         employee.gender = gender
- 
+
 #         if jdate:
 #             employee.join_date = jdate
 
@@ -297,26 +321,31 @@ def admin_job_view_detail(request, pk):
 
 #     return render(request, "emp/emp_profile_edit.html", locals())
 
+from django.contrib import messages
+
 
 def emp_profile_edit(request):
     if not request.user.is_authenticated:
         return redirect("emp_login")
-    
+
     user = request.user
     employee = EmployeeDetail.objects.get(user=user)
-    error = ""
 
     if request.method == "POST":
         form = EmployeeProfileEditForm(request.POST, instance=employee)
         if form.is_valid():
+            print('..................')
+            messages.success(request, "Success.")
             form.save()
-            error = "no"
+            return redirect("emp_profile")
         else:
-            error = "yes"
+            print('9999999999999999')
+            messages.error(request, "Failed")
+            return render(request, "emp/1.html", {"form": form})
     else:
         form = EmployeeProfileEditForm(instance=employee)
 
-    return render(request, "emp/1.html", {"form": form, "error": error})
+    return render(request, "emp/1.html", {"form": form})
 
 
 def emp_edit_experiences(request):
@@ -363,7 +392,6 @@ def emp_edit_experiences(request):
         except:
             error = "yes"
     return render(request, "emp/emp_details/emp_experience_update.html", locals())
-
 
 
 def emp_edit_education(request):
@@ -425,23 +453,8 @@ def emp_edit_education(request):
     return render(request, "emp/emp_details/emp_education_update.html", locals())
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # change password
+
 
 def change_password(request):
     if not request.user.is_authenticated:
@@ -462,7 +475,6 @@ def change_password(request):
         except:
             error = "yes"
     return render(request, "emp/emp_change_password.html", locals())
-
 
 
 def admin_change_password(request):
@@ -486,11 +498,8 @@ def admin_change_password(request):
     return render(request, "admin/admin_change_password.html", locals())
 
 
-
-
-
 # delete view
-def emp_profile_delete(request, pk):    
+def emp_profile_delete(request, pk):
     if not request.user.is_superuser:
         return redirect("admin_login")
     try:
@@ -502,9 +511,7 @@ def emp_profile_delete(request, pk):
         return HttpResponse("An error occurred", status=500)
 
 
-
-
-def job_post_delete(request, pk):    
+def job_post_delete(request, pk):
     if not request.user.is_superuser:
         return redirect("admin_login")
     try:
@@ -514,7 +521,3 @@ def job_post_delete(request, pk):
     except Exception as e:
         # Handle exceptions or errors
         return HttpResponse("An error occurred", status=500)
-
-
-
-

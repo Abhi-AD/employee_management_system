@@ -21,56 +21,7 @@
                <form action="" method="post" name="signup" onsubmit="return checkpassword()"
                     enctype="multipart/form-data">
                     {% csrf_token %}
-                    <div class="form-row">
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">First Name</label>
-                                   <input type="text" name="firstname" class="form-control"
-                                        placeholder="Enter a your First Name" pattern="[A-Za-z]+" required>
-                              </div>
-                         </div>
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">Last Name</label>
-                                   <input type="text" name="lastname" class="form-control"
-                                        placeholder="Enter a your Last Name" pattern="[A-Za-z]+" required>
-                              </div>
-                         </div>
-                         <div class="col-sm-12">
-                              <div class="form-group">
-                                   <label for="">Employee Code</label>
-                                   <input type="text" name="empcode" class="form-control"
-                                        placeholder="Enter a your Employee Code" pattern="[0-9]+" required>
-                              </div>
-                         </div>
-                         <div class="col-sm-12">
-                              <div class="form-group">
-                                   <label for="">Email ID</label>
-                                   <input type="email" name="email" class="form-control"
-                                        placeholder="Enter a your email" required>
-                              </div>
-                         </div>
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">Password</label>
-                                   <input type="password" name="password" class="form-control"
-                                        placeholder="Enter a your password" required>
-                              </div>
-                         </div>
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">Conform Password</label>
-                                   <input type="password" name="conformpassword" class="form-control"
-                                        placeholder="Enter a your password Again" required>
-                              </div>
-                         </div>
-                         <div class="col-sm-6">
-                              <div class="form-group">
-                                   <label for="">Feature Image</label>
-                                   <input type="file" name="feature_image" class="form-control">
-                              </div>
-                         </div>
-                    </div>
+                    
                     <input type="submit" value="Submit" class="m-4 px-3 btn btn-success">
                </form>
           </div>
