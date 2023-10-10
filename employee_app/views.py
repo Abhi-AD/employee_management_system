@@ -437,7 +437,59 @@ def emp_profile_edit(request):
 
 
 # using the forms
+# def emp_profile_edit(request):
+#     if not request.user.is_authenticated:
+#         return redirect("emp_login")
 
+#     user = request.user
+#     employee = EmployeeDetail.objects.get(user=user)
+
+#     if request.method == "POST":
+#         form = EmployeeProfileEditForm(request.POST, request.FILES)
+
+#         if form.is_valid():
+#             # Get cleaned data from the form
+#             first_name = form.cleaned_data["first_name"]
+#             last_name = form.cleaned_data["last_name"]
+#             empcode = form.cleaned_data["empcode"]
+#             empdept = form.cleaned_data["empdept"]
+#             designation = form.cleaned_data["designation"]
+#             gender = form.cleaned_data["gender"]
+#             contact = form.cleaned_data["contact"]
+#             join_date = form.cleaned_data["join_date"]
+
+#             # Update the employee object with the new data
+#             employee.user.first_name = first_name
+#             employee.user.last_name = last_name
+#             employee.empcode = empcode
+#             employee.contact = contact
+#             employee.designation = designation
+#             employee.empdept = empdept
+#             employee.gender = gender
+
+#             if join_date:
+#                 employee.join_date = join_date
+
+#             # Save the changes
+#             employee.user.save()
+#             employee.save()
+
+#             return redirect("emp_profile")  # Redirect to a success page
+
+#     else:
+#         # Initialize the form with the existing data
+#         form = EmployeeProfileEditForm(initial={
+#             "first_name": employee.user.first_name,
+#             "last_name": employee.user.last_name,
+#             "empcode": employee.empcode,
+#             "empdept": employee.empdept,
+#             "designation": employee.designation,
+#             "gender": employee.gender,
+#             "contact": employee.contact,
+#             "join_date": employee.join_date
+#         })
+
+#     return render(request, "emp/emp_profile_edit1.html", {"form": form})
 
     
 
