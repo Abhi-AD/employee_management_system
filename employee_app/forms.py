@@ -33,12 +33,9 @@ class EmployeeEducationForm(forms.ModelForm):
         model = EmployeeEducation
         fields = '__all__'
         
-        
-class EmployeeProfileEditForm(forms.ModelForm):
-    class Meta:
-        model = EmployeeDetail
-        fields = ['empcode', 'empdept', 'designation', 'contact', 'gender', 'join_date']
-        
+
+
+      
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
@@ -50,3 +47,38 @@ class EmployeeProfileForm(forms.ModelForm):
         model = EmployeeDetail
         fields = '__all__'
   
+  
+  
+from django import forms
+
+class RegistrationForm(forms.Form):
+    first_name = forms.CharField(max_length=255)
+    last_name = forms.CharField(max_length=255)
+    empcode = forms.IntegerField()
+    username = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput)
+    confirm_password = forms.CharField(widget=forms.PasswordInput)
+    image = forms.FileField() 
+    
+
+class EmployeeProfileEditForm(forms.Form):
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other'),
+    )
+    first_name = forms.CharField(max_length=255)
+    last_name = forms.CharField(max_length=255)
+    empcode = forms.IntegerField()
+    image = forms.FileField()
+    empdept = forms.CharField(max_length=255)
+    designation = forms.CharField(max_length=255)
+    contact = forms.IntegerField()
+    gender = forms.ChoiceField(choices=GENDER_CHOICES)
+    join_date = forms.DateField()
+  
+  
+class EmployeeExperienceEditForm(forms.ModelForm):
+    class Meta:
+        model =  EmployeeExperience
+        fields = '__all__'       

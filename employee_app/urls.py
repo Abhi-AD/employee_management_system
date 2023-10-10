@@ -33,6 +33,7 @@ urlpatterns = [
     
     
     # edit emp
+    # path("emp_profile_edit/", EmployeeProfileEditView.as_view(), name="emp_profile_edit"),
     path("emp_profile_edit/", emp_profile_edit, name="emp_profile_edit"),
     path("emp_edit_experiences/", emp_edit_experiences, name="emp_edit_experiences"),
     path("emp_edit_education/", emp_edit_education, name="emp_edit_education"),

@@ -4,9 +4,9 @@
 {% include 'header.html' %}
 <script>
      function checkpassword() {
-          if (document.signup.password.value != document.signup.conformpassword.value) {
+          if (document.signup.password.value != document.signup.confirmpassword.value) {
                alert('Password And Conform password is doesnot match');
-               document.signup.conformpassword.focus();
+               document.signup.confirmpassword.focus();
                return false;
           }
           return true;
@@ -21,7 +21,61 @@
                <form action="" method="post" name="signup" onsubmit="return checkpassword()"
                     enctype="multipart/form-data">
                     {% csrf_token %}
-                    
+                    <div class="form-row">
+                         <div class="col-sm-6">
+                              <div class="form-group">
+                                   <label for="">First Name</label>
+                                   <input class="form-control valid" name="firstname" id="first_name" type="text"
+                                        placeholder="Enter your  first name....." pattern="[A-Za-z]+" required>
+                                   {{user_form.first_name.errors}}
+                              </div>
+                         </div>
+                         <div class="col-sm-6">
+                              <div class="form-group">
+                                   <label for="">Last Name</label>
+                                   <input class="form-control valid" name="lastname" id="last_name" type="text"
+                                        placeholder="Enter your last name....." pattern="[A-Za-z]+" required>
+                                   {{user_form.last_name.errors}}
+                              </div>
+                         </div>
+                         <div class="col-sm-12">
+                              <div class="form-group">
+                                   <label for="">Employee Code</label>
+                                   <input type="text" name="empcode" class="form-control"
+                                        placeholder="Enter a your Employee Code" pattern="[0-9]+"
+                                        required>{{employee_form.empcode.errors}}
+                              </div>
+                         </div>
+                         <div class="col-sm-12">
+                              <div class="form-group">
+                                   <label for="">Email ID</label>
+                                   <input type="email" name="email" class="form-control"
+                                        placeholder="Enter a your email" required>{{user_form.username.errors}}
+                              </div>
+                         </div>
+                         <div class="col-sm-6">
+                              <div class="form-group">
+                                   <label for="">Password</label>
+                                   <input type="password" name="password" class="form-control"
+                                        placeholder="Enter a your password" required>{{user_form.password.errors}}
+                              </div>
+                         </div>
+                         <div class="col-sm-6">
+                              <div class="form-group">
+                                   <label for="">Conform Password</label>
+                                   <input type="password" name="confirmpassword" class="form-control"
+                                        placeholder="Enter a your password Again"
+                                        required>{{user_form.confirmpassword.errors}}
+                              </div>
+                         </div>
+                         <div class="col-sm-6">
+                              <div class="form-group">
+                                   <label for="">Feature Image</label>
+                                   <input type="file" name="feature_image"
+                                        class="form-control">{{employee_form.feature_image}}
+                              </div>
+                         </div>
+                    </div>
                     <input type="submit" value="Submit" class="m-4 px-3 btn btn-success">
                </form>
           </div>

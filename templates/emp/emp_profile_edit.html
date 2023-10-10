@@ -25,21 +25,6 @@
                </div>
 
           </div>
-
-
-          {% if error == "no" %}
-          <div class="alert alert-success" role="alert">
-               Profile update Successfully
-          </div>
-          {% endif %}
-
-          {% if error == "yes" %}
-          <div class="alert alert-danger" role="alert">
-               Please Enter Correct Details
-          </div>
-          {% endif %}
-
-
           <div class="container-fluid">
                <form action="{% url 'emp_profile_edit' %}" method="post" name="signup" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -47,14 +32,14 @@
                          <div class="col-sm-6">
                               <div class="form-group">
                                    <label for="">First Name</label>
-                                   <input type="text" name="firstname" class="form-control"
+                                   <input type="text" name="first_name" class="form-control"
                                         value="{{employee.user.first_name}}">
                               </div>
                          </div>
                          <div class="col-sm-6">
                               <div class="form-group">
                                    <label for="">Last Name</label>
-                                   <input type="text" name="lastname" class="form-control"
+                                   <input type="text" name="last_name" class="form-control"
                                         value="{{employee.user.last_name}}">
                               </div>
                          </div>
@@ -106,6 +91,7 @@
                                         <option value="none">Select Gender[{{employee.gender}}]</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
                                    </select>
                               </div>
                          </div>

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'header.html' %}
+<script>
+     function checkpassword() {
+          if (document.signup.password.value != document.signup.confirmpassword.value) {
+               alert('Password And Conform password is doesnot match');
+               document.signup.confirmpassword.focus();
+               return false;
+          }
+          return true;
+     }
+</script>
+
+
+<div class="card shadow m-5">
+     <div class="card-body">
+          <h2 class="p-2 text-secondary">Create Your Account</h2>
+
+          <div class="container-fluid">
+               <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Submit" class="m-4 px-3 btn btn-success">
+                    
+               </form>
+
+               {% if form.errors %}
+               <div class="error">
+                    <p>There was an error with your submission. Please correct the following:</p>
+                    <ul>
+                         {% for field, errors in form.errors.items %}
+                         {% for error in errors %}
+                         <li>{{ field }}: {{ error }}</li>
+                         {% endfor %}
+                         {% endfor %}
+                    </ul>
+               </div>
+               {% endif %}
+
+               <p>Already have an account? <a href="{% url 'emp_login' %}">Login</a></p>
+          </div>
+     </div>
+</div>
+
+
+{% if error == "no" %}
+<script>
+     alert("Sign of sucessfully");
+     window.location = "{% url 'emp_login'%}";  // Redirecting to other page (add)
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+     alert('Please Enter Correct Details');  
+</script>
+
+{% endif %}
+
+
+
+
+
+
+{% endblock content %}
