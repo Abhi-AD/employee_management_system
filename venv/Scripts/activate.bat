@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\DELL\Desktop\python_and_django\django\practice\Management System\Employee\venv
+set VIRTUAL_ENV=C:\Users\DELL\Desktop\employee_management_system\venv
 
 if not defined PROMPT set PROMPT=$P$G
 

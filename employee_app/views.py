@@ -50,7 +50,7 @@ from django.urls import reverse_lazy
 #                     user=user, empcode=empcode, feature_image=feature_image
 #                 )
 #                 EmployeeExperience.objects.create(user=user)
-#                 EmployeeEducation.objects.create(user=user)
+#                 EmployeeDetail.objects.create(user=user)
 #                 error = "no"
 #             except:
 #                 error = "yes"
@@ -84,7 +84,7 @@ from django.urls import reverse_lazy
 #                     user=user, empcode=empcode, feature_image=feature_image
 #                 )
 #                 EmployeeExperience.objects.create(user=user)
-#                 EmployeeEducation.objects.create(user=user)
+#                 EmployeeDetail.objects.create(user=user)
 #                 error = "no"
 #             except:
 #                 error = "yes"
@@ -128,9 +128,9 @@ class RegistrationView(FormView):
                     user=user, empcode=empcode, feature_image=image
                 )
 
-                # Create related EmployeeExperience and EmployeeEducation instances
+                # Create related EmployeeExperience and EmployeeDetail instances
                 EmployeeExperience.objects.create(user=user)
-                EmployeeEducation.objects.create(user=user)
+                EmployeeDetail.objects.create(user=user)
 
                 return super().form_valid(form)
             except Exception as e:
@@ -175,9 +175,9 @@ class NewEmployeeRegistrationView(FormView):
                     user=user, empcode=empcode, feature_image=image
                 )
 
-                # Create related EmployeeExperience and EmployeeEducation instances
+                # Create related EmployeeExperience and EmployeeDetail instances
                 EmployeeExperience.objects.create(user=user)
-                EmployeeEducation.objects.create(user=user)
+                EmployeeDetail.objects.create(user=user)
 
                 return super().form_valid(form)
             except Exception as e:
@@ -335,8 +335,8 @@ def emp_education(request):
 
     user = request.user
     try:
-        education = EmployeeEducation.objects.get(user=user)
-    except EmployeeEducation.DoesNotExist:
+        education = EmployeeDetail.objects.get(user=user)
+    except EmployeeDetail.DoesNotExist:
         education = None
 
     if request.method == "POST":
@@ -435,63 +435,61 @@ def emp_profile_edit(request):
 
 
 
-
-# using the forms
 # def emp_profile_edit(request):
 #     if not request.user.is_authenticated:
 #         return redirect("emp_login")
 
 #     user = request.user
-#     employee = EmployeeDetail.objects.get(user=user)
+#     education = EmployeeDetail.objects.get(user=user)
+
+#     if request.method == "POST":
+#         form = EmployeeProfileEditForm(request.GET, instance=education)
+#         if form.is_valid():
+#             print("Sucess update")
+#             messages.success(request, "Sucess")
+#             form.save()
+#             return redirect("emp_experiences")
+#         else:
+#             print("Failed update")
+#             messages.error(request, "failed")
+#             return render(
+#                 request, "emp/emp_details/emp_profile_edit1.html", {"form": form}
+#             )
+#     else:
+#         form = EmployeeProfileEditForm(instance=education)
+
+#         return render(
+#             request, "emp/emp_details/emp_education_update.html", {"form": form}
+#         )
+
+
+
+
+
+
+
+# using the forms
+# def emp_profile_edit(request):
+#     # Check if the user is authenticated
+#     if not request.user.is_authenticated:
+#         return redirect("emp_login")
+
+#     user = request.user
+#     employee = EmployeeDetail.objects.get(user=user, instance = employee)
 
 #     if request.method == "POST":
 #         form = EmployeeProfileEditForm(request.POST, request.FILES)
-
 #         if form.is_valid():
-#             # Get cleaned data from the form
-#             first_name = form.cleaned_data["first_name"]
-#             last_name = form.cleaned_data["last_name"]
-#             empcode = form.cleaned_data["empcode"]
-#             empdept = form.cleaned_data["empdept"]
-#             designation = form.cleaned_data["designation"]
-#             gender = form.cleaned_data["gender"]
-#             contact = form.cleaned_data["contact"]
-#             join_date = form.cleaned_data["join_date"]
-
-#             # Update the employee object with the new data
-#             employee.user.first_name = first_name
-#             employee.user.last_name = last_name
-#             employee.empcode = empcode
-#             employee.contact = contact
-#             employee.designation = designation
-#             employee.empdept = empdept
-#             employee.gender = gender
-
-#             if join_date:
-#                 employee.join_date = join_date
-
-#             # Save the changes
-#             employee.user.save()
-#             employee.save()
-
-#             return redirect("emp_profile")  # Redirect to a success page
-
+#             form.save()
+#             messages.success(request, "Success")
+#             return redirect("emp_experiences")
+#         else:
+#             messages.error(request, "Failed to update. Please check the form.")
 #     else:
-#         # Initialize the form with the existing data
-#         form = EmployeeProfileEditForm(initial={
-#             "first_name": employee.user.first_name,
-#             "last_name": employee.user.last_name,
-#             "empcode": employee.empcode,
-#             "empdept": employee.empdept,
-#             "designation": employee.designation,
-#             "gender": employee.gender,
-#             "contact": employee.contact,
-#             "join_date": employee.join_date
-#         })
+#         form = EmployeeProfileEditForm()
 
-#     return render(request, "emp/emp_profile_edit1.html", {"form": form})
+#     return render(request, "emp/emp_profile_edit1.html", {"employee":employee})
 
-    
 
 
 
@@ -588,9 +586,9 @@ def emp_edit_education(request):
     error = ""
     user = request.user
     try:
-        education = EmployeeEducation.objects.get(user=user)
+        education = EmployeeDetail.objects.get(user=user)
     except ObjectDoesNotExist:
-        education = EmployeeEducation(user=user)
+        education = EmployeeDetail(user=user)
 
     if request.method == "POST":
         coursepg = request.POST["coursepg"]
@@ -650,10 +648,10 @@ def emp_edit_education(request):
 #         return redirect("emp_login")
 
 #     user = request.user
-#     education = EmployeeEducation.objects.get(user=user)
+#     education = EmployeeDetail.objects.get(user=user)
 
 #     if request.method == "POST":
-#         form = EmployeeEducationForm(request.GET, instance=education)
+#         form = EmployeeProfileEditForm(request.GET, instance=education)
 #         if form.is_valid():
 #             print("Sucess update")
 #             messages.success(request, "Sucess")
@@ -666,7 +664,7 @@ def emp_edit_education(request):
 #                 request, "emp/emp_details/emp_education_update.html", {"form": form}
 #             )
 #     else:
-#         form = EmployeeEducationForm(instance=education)
+#         form = EmployeeProfileEditForm(instance=education)
 
 #         return render(
 #             request, "emp/emp_details/emp_education_update.html", {"form": form}
