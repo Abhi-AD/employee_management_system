@@ -12,45 +12,38 @@
 ## Run Locally
 
 
-
-  1. Virtual enviroment
-
-```bash
-  python -m venv ./venv
-```
-
-  2. Activate virtual enviroment
+  1. Activate virtual enviroment
 
 ```bash
   .\venv\Scripts\activate
 ```
 
-  3. Install django
+  2. Install django
 ```bash
   pip install django
 ```
 
-  4. Clone the project
+  3. Clone the project
 
 ```bash
   git clone https://github.com/Abhi-AD/employee_management_system
 ```
-  5. Createsuperuser
+  4. Createsuperuser
 
 ```bash
   python manage.py createsuperuser
 ```
-  6. Makemigrations
+  5. Makemigrations
 
 ```bash
   python manage.py makemigrations
 ```
-   7. Migrate
+   6. Migrate
 
 ```bash
   python manage.py migrate
 ```
-  8. Runserver
+  7. Runserver
 ```bash
   python manage.py runserver
 ```
