@@ -4,7 +4,7 @@
 
 
 ## Demo
-[https://github.com/Abhi-AD/employee_management_system]
+https://github.com/Abhi-AD/employee_management_system
 
 - username: employee
 - password: employee
